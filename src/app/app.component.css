@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'KraftNine';
+    src: url('/assets/fonts/KraftNine.ttf') format('truetype');
+}
+
+/* ----- BODY ------*/
+body {
+    font-family: 'Indie Flower', cursive;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 40px;
+}
+
+body ::-webkit-scrollbar-track {
+    background: transparent;
+} 
+
+body ::-webkit-scrollbar { 
+    display: none; 
+} 

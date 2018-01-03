@@ -1,0 +1,26 @@
+<div class="ui centered grid table-wrapper">
+  <table class="thead-table">
+    <thead>
+      <tr>
+        <th class="month">{{year}}</th>
+        <th *ngFor="let member of memberList; let i = index; let even = even;" class="member-mobile">{{getInitials(i)}}</th>
+        <th  *ngFor="let member of memberList; let i = index; let even = even;" class="member">{{member.firstName}}</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="ui centered grid table-wrapper table-wrapper-inner">
+  <table class="task-table">
+    <tbody *ngFor="let month of months; let sectionIndex = index; let even = even;">
+      <tr class="month-mobile">
+        <td colSpan="{{getMembersLenth()}}" class="month-mobile">{{month}}</td>
+      </tr>
+      <tr class="{{currentMonth(sectionIndex)? 'current' : ''}}">
+        <td class="month">{{month}}</td>
+        <td class="icon" *ngFor="let member of memberList; let i = index; let even = even;">
+          <img class="icon-img" *ngFor="let task of getIcon(renderTasks(i), sectionIndex)" src="assets/images/{{task}}.png" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
