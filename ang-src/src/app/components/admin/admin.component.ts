@@ -9,21 +9,31 @@ import { MemberService } from '../../services/member.service';
 export class AdminComponent implements OnInit {
 
   constructor(private _memberService: MemberService) { 
+    this.members = [];
   }
+
+  public members: any;
 
   ngOnInit() {
-    
+    this._memberService.getAllMembers()
+    .subscribe((data)=>{
+      if(data.success) {
+        data.members.forEach(m => {
+          this.members.push(m);
+        });
+      } else {
+        console.log('shit');
+      }
+    })
   }
 
-  public createMember(){
-    this._memberService.createMember({priority: 6, firstName: 'Sven', lastName: 'Testsson'})   
+  public doCreate(fn, ln){
+    if (fn && ln) {
+      this._memberService.createMember({priority: this.members.length+1, firstName: fn, lastName: ln})   
     .subscribe((data)=>{
-      if(data.success){
-        console.log('YEY');
-      }
-      else{
-        console.error(data);
-      }
+      data.success && console.log('YEAH');
+      !data.success && console.log('fail');
     });
+    }
   }
 }

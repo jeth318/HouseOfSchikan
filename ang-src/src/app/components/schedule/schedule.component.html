@@ -3,8 +3,8 @@
     <thead>
       <tr>
         <th class="month">{{year}}</th>
-        <th *ngFor="let member of members; let i = index; let even = even;" class="member-mobile">{{getInitials(i)}}</th>
-        <th  *ngFor="let member of members; let i = index; let even = even;" class="member">{{member.firstName}}</th>
+        <th *ngFor="let member of members; let i = index; let even = even;" attr.data-memberid="{{member._id}}" class="member-mobile">{{getInitials(i)}}</th>
+        <th *ngFor="let member of members; let i = index; let even = even;" attr.data-memberid="{{member._id}}" class="member">{{member.firstName}}</th>
       </tr>
     </thead>
   </table>

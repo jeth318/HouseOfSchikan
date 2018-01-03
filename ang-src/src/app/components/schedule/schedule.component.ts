@@ -90,6 +90,7 @@ export class ScheduleComponent implements OnInit {
                 taskReturn.push(taskListRet.slice(0, 5));
                 break;
             default:
+                taskReturn = this.tasks;
                 break;
         }
         return taskReturn;

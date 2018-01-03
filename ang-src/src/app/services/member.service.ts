@@ -17,7 +17,7 @@ export class MemberService {
     let body = {
       memberToCreate
     };
-    return this.http.post(this.baseUrl+'create', body, {headers}).map(res => res.json());
+    return this.http.post(this.baseUrl+'create', body, {headers: headers}).map(res => res.json());
   }
   getAllMembers() {
     let headers = new Headers();

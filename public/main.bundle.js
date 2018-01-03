@@ -149,7 +149,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/admin/admin.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <a href=\"#\" (click)=\"createMember()\">CREATE MEMBER!</a>\n</div>\n"
+module.exports = "\n  <div style=\"margin-bottom: 20px;\">\n      <input type=\"text\" #firstname>\n      <input type=\"text\" #lastname>\n      <button type=\"button\" (click) = 'doCreate(firstname.value, lastname.value)'>Add</button>\n  </div>\n\n  "
 
 /***/ }),
 
@@ -174,19 +174,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AdminComponent = (function () {
     function AdminComponent(_memberService) {
         this._memberService = _memberService;
+        this.members = [];
     }
     AdminComponent.prototype.ngOnInit = function () {
-    };
-    AdminComponent.prototype.createMember = function () {
-        this._memberService.createMember({ priority: 6, firstName: 'Sven', lastName: 'Testsson' })
+        var _this = this;
+        this._memberService.getAllMembers()
             .subscribe(function (data) {
             if (data.success) {
-                console.log('YEY');
+                data.members.forEach(function (m) {
+                    _this.members.push(m);
+                });
             }
             else {
-                console.error(data);
+                console.log('shit');
             }
         });
+    };
+    AdminComponent.prototype.doCreate = function (fn, ln) {
+        if (fn && ln) {
+            this._memberService.createMember({ priority: this.members.length + 1, firstName: fn, lastName: ln })
+                .subscribe(function (data) {
+                data.success && console.log('YEAH');
+                !data.success && console.log('fail');
+            });
+        }
     };
     AdminComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -286,7 +297,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/schedule/schedule.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui centered grid table-wrapper\">\n  <table class=\"thead-table\">\n    <thead>\n      <tr>\n        <th class=\"month\">{{year}}</th>\n        <th *ngFor=\"let member of members; let i = index; let even = even;\" class=\"member-mobile\">{{getInitials(i)}}</th>\n        <th  *ngFor=\"let member of members; let i = index; let even = even;\" class=\"member\">{{member.firstName}}</th>\n      </tr>\n    </thead>\n  </table>\n</div>\n<div class=\"ui centered grid table-wrapper table-wrapper-inner\">\n  <table class=\"task-table\">\n    <tbody *ngFor=\"let month of months; let monthIndex = index; let even = even;\">\n      <tr class=\"month-mobile\">\n        <td colSpan=\"{{getMembersLength()}}\" class=\"month-mobile\">{{month}}</td>\n      </tr>\n      <tr class=\"{{currentMonth(monthIndex)? 'current' : ''}}\">\n        <td class=\"month\">{{month}}</td>\n        <td class=\"icon\" *ngFor=\"let member of members; let i = index; let even = even;\">\n          <img class=\"icon-img\" *ngFor=\"let task of renderTaskList(i, monthIndex)\" src=\"assets/images/{{task}}.png\" />\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
+module.exports = "<div class=\"ui centered grid table-wrapper\">\n  <table class=\"thead-table\">\n    <thead>\n      <tr>\n        <th class=\"month\">{{year}}</th>\n        <th *ngFor=\"let member of members; let i = index; let even = even;\" attr.data-memberid=\"{{member._id}}\" class=\"member-mobile\">{{getInitials(i)}}</th>\n        <th *ngFor=\"let member of members; let i = index; let even = even;\" attr.data-memberid=\"{{member._id}}\" class=\"member\">{{member.firstName}}</th>\n      </tr>\n    </thead>\n  </table>\n</div>\n<div class=\"ui centered grid table-wrapper table-wrapper-inner\">\n  <table class=\"task-table\">\n    <tbody *ngFor=\"let month of months; let monthIndex = index; let even = even;\">\n      <tr class=\"month-mobile\">\n        <td colSpan=\"{{getMembersLength()}}\" class=\"month-mobile\">{{month}}</td>\n      </tr>\n      <tr class=\"{{currentMonth(monthIndex)? 'current' : ''}}\">\n        <td class=\"month\">{{month}}</td>\n        <td class=\"icon\" *ngFor=\"let member of members; let i = index; let even = even;\">\n          <img class=\"icon-img\" *ngFor=\"let task of renderTaskList(i, monthIndex)\" src=\"assets/images/{{task}}.png\" />\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
 
 /***/ }),
 
@@ -378,6 +389,7 @@ var ScheduleComponent = (function () {
                 taskReturn.push(taskListRet.slice(0, 5));
                 break;
             default:
+                taskReturn = this.tasks;
                 break;
         }
         return taskReturn;
@@ -433,7 +445,7 @@ var ScheduleComponent = (function () {
 /* unused harmony export messageActive */
 // Globala Variabler
 // OBS! om localhost, sätt localhostUrl = "http://localhost:8080/", annars "";
-var localhostUrl = "http://localhost:8080/";
+var localhostUrl = "/";
 var messageActive = false;
 
 

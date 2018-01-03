@@ -7,8 +7,8 @@ memberNotFoundError.message = "Member found not found";
 
 let MemberSchema = new Schema({
     priority: {type: Number, required: false},
-    firstname: {type: String, required: true},
-    lastname: {type: String, required: true}
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true}
 });
 
 MemberSchema.methods.toJSON = function () {
