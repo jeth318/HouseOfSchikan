@@ -1,11 +1,15 @@
-@font-face {
-    font-family: 'KraftNine';
-    src: url('/assets/fonts/KraftNine.ttf') format('truetype');
-}
+
 .header {
     font-family: 'KraftNine', sans-serif; 
     text-align: left;
     padding: 1rem 1rem 3rem;
     font-size: 4rem;
     color: purple;
+}
+
+@media screen and (max-width: 525px) {
+
+    .header {
+        font-size: 3rem;
+    }
 }

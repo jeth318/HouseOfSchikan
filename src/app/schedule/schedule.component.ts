@@ -15,7 +15,7 @@ export class ScheduleComponent implements OnInit {
   constructor() {
     this.year = new Date().getFullYear().toString();
     this.month = new Date().getMonth().toString();
-    this.memberList = [
+    this.members = [
         {
             firstName: 'Joline',
             lastName: 'Schikan',
@@ -62,17 +62,17 @@ export class ScheduleComponent implements OnInit {
     ];
 }
 
-    public tasks: any[];
-    public memberList: Member[];
+    public tasks: any;
+    public members: Member[];
     public months: String[];
     public year: String;
     public month: String;
 
     public genereteTaskList() {
         let taskListRet = this.tasks;
-        let taskReturn = [];
-        let temp = [];
-        switch (this.memberList.length) {
+        let taskReturn = []
+
+        switch (this.members.length) {
             case 5:
                 taskReturn = this.tasks;
                 break;
@@ -85,7 +85,7 @@ export class ScheduleComponent implements OnInit {
             case 3:
                 taskReturn.push(taskListRet.slice(0, 2));
                 taskReturn.push(taskListRet.slice(2, 4));
-                taskReturn.push(taskListRet[this.tasks.length - 1]);
+                taskReturn.push(taskListRet[this.tasks.length-1]);
                 break;
             case 2:
                 taskReturn.push(taskListRet.slice(0, 2));
@@ -100,41 +100,37 @@ export class ScheduleComponent implements OnInit {
         return taskReturn;
     }
 
-    public renderTasks(index) {
+    public renderTaskList(taskIndex, monthIndex) {
         let newArr = [];
         let taskList = this.genereteTaskList();
 
         for (let i = 0; i < 12; i++) {
-            var pointer = (i + index) % taskList.length;
-            if (!Array.isArray(taskList[pointer]))  {
-                newArr.push(new Array(taskList[pointer]));
-            } else {
+            var pointer = (i + taskIndex) % taskList.length;
+            if (Array.isArray(taskList[pointer]))  {
                 newArr.push(taskList[pointer]);
+            } else {
+                newArr.push(new Array(taskList[pointer]));
             }
         }
-        return newArr.reverse();
+        newArr.reverse();
+        return newArr[monthIndex];
+    }
+
+    public getMembersLenth() {
+        return this.members.length;
     }
 
     public shortMonth(index) {
         return this.months[index].slice(0, 3);
     }
 
-    public getInitials(index) {
-        return this.memberList[index].firstName.slice(0, 1) +
-            '.' + this.memberList[index].lastName.slice(0, 1)
-    }
-
-    public getMembersLenth() {
-        return this.memberList.length;
-    }
-
-    public getIcon(taskList, index) {
-        let className: String;
-        return taskList[index];
-    }
-
     public currentMonth(index) {
         return Number(this.month) === index ? true : false;
+    }
+
+    public getInitials(index) {
+        return this.members[index].firstName.slice(0, 1) + '.' 
+            + this.members[index].lastName.slice(0, 1)
     }
     
     ngOnInit() {
