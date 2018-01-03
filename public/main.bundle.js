@@ -418,7 +418,7 @@ var MemberService = (function () {
     MemberService.prototype.getAllMembers = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         console.log('inside create-FE' + this.baseUrl + 'create');
-        return this.http.get(this.baseUrl + 'api/members/', { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get(this.baseUrl, { headers: headers }).map(function (res) { return res.json(); });
         ;
     };
     MemberService.prototype.getUserById = function (id, token) {
