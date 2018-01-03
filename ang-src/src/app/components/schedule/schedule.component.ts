@@ -34,8 +34,9 @@ export class ScheduleComponent implements OnInit {
     ngOnInit() {
         this.year = new Date().getFullYear().toString();
         this.month = new Date().getMonth().toString();
-        this.members = this._memberService.getAllUsers();
+        this.members = [];
         this.tasks = this._taskService.getAllTasks();
+        this._memberService.getAllMembers();                
     }
 
     public tasks: any;

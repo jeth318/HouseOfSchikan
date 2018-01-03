@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import * as globals from "../globals/globals";
 import 'rxjs/add/operator/map';
 @Injectable()
 
 export class MemberService {
 
-  public baseUrl:string = 'api/users/';
+  public baseUrl:string = globals.localhostUrl+'api/members/';
   constructor(public http: Http) {
     this.members = [
         {
@@ -32,10 +33,17 @@ export class MemberService {
    }
    public members: any;
 
-  getAllUsers() {
+   createUser(userToCreate) {
     let headers = new Headers();
     //headers.append('Authorization', token);
-    return this.members;
+    console.log('inside create-FE' + this.baseUrl+'create');
+    let body = {
+      userToCreate
+    };
+    return this.http.post(this.baseUrl+'create', body);
+  }
+  getAllMembers() {
+    return this.http.get('api/members/');
   }
 
   getUserById(id, token) {
