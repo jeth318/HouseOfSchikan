@@ -351,7 +351,7 @@ var ScheduleComponent = (function () {
 /* unused harmony export messageActive */
 // Globala Variabler
 // OBS! om localhost, sätt localhostUrl = "http://localhost:8080/", annars "";
-var localhostUrl = "http://localhost:8080/";
+var localhostUrl = "";
 var messageActive = false;
 
 
