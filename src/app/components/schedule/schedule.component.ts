@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MemberService } from '../../services/member.service';
+import { TaskService } from '../../services/task.service';
 
 interface Member {
   firstName: String;
@@ -12,55 +14,29 @@ interface Member {
 })
 export class ScheduleComponent implements OnInit {
 
-  constructor() {
-    this.year = new Date().getFullYear().toString();
-    this.month = new Date().getMonth().toString();
-    this.members = [
-        {
-            firstName: 'Joline',
-            lastName: 'Schikan',
-        },
-        {
-            firstName: 'Hampus',
-            lastName: 'Ågren',
-        },
-        {
-            firstName: 'Linnea',
-            lastName: 'Ramne',
-        },
-        {
-            firstName: 'Iris',
-            lastName: 'Minö',
-        },
-        {
-            firstName: 'Jesper',
-            lastName: 'Thörnberg',
-        }
-    ];
+  constructor(private _memberService: MemberService, private _taskService: TaskService) {
+        this.months = [
+            'Januari',
+            'Februari',
+            'Mars',
+            'Aprli',
+            'Maj',
+            'Juni',
+            'Juli',
+            'Augusti',
+            'September',
+            'Oktober',
+            'November',
+            'December',
+        ];
+    }
 
-    this.tasks = [
-        'köket',
-        'tvätt',
-        'stora-badrummet',
-        'lilla-badrummen',
-        'damsuga',
-    ];
-
-    this.months = [
-        'Januari',
-        'Februari',
-        'Mars',
-        'Aprli',
-        'Maj',
-        'Juni',
-        'Juli',
-        'Augusti',
-        'September',
-        'Oktober',
-        'November',
-        'December',
-    ];
-}
+    ngOnInit() {
+        this.year = new Date().getFullYear().toString();
+        this.month = new Date().getMonth().toString();
+        this.members = this._memberService.getAllUsers();
+        this.tasks = this._taskService.getAllTasks();
+    }
 
     public tasks: any;
     public members: Member[];
@@ -131,8 +107,5 @@ export class ScheduleComponent implements OnInit {
     public getInitials(index) {
         return this.members[index].firstName.slice(0, 1) + '.' 
             + this.members[index].lastName.slice(0, 1)
-    }
-    
-    ngOnInit() {
     }
 }
