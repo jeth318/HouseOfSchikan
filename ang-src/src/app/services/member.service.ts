@@ -8,28 +8,6 @@ export class MemberService {
 
   public baseUrl:string = globals.localhostUrl+'api/members/';
   constructor(public http: Http) {
-    this.members = [
-        {
-            firstName: 'Joline',
-            lastName: 'Schikan',
-        },
-        {
-            firstName: 'Hampus',
-            lastName: 'Ågren',
-        },
-        {
-            firstName: 'Linnea',
-            lastName: 'Ramne',
-        },
-        {
-            firstName: 'Iris',
-            lastName: 'Minö',
-        },
-        {
-            firstName: 'Jesper',
-            lastName: 'Thörnberg',
-        }
-    ];
    }
    public members: any;
 
@@ -44,7 +22,6 @@ export class MemberService {
   }
   getAllMembers() {
     let headers = new Headers();
-    console.log('inside create-FE' + this.baseUrl+'create');
     return this.http.get(this.baseUrl, {headers: headers}).map(res => res.json());;
   }
 

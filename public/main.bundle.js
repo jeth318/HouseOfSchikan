@@ -234,9 +234,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ScheduleComponent = (function () {
     function ScheduleComponent(_memberService, _taskService) {
-        var _this = this;
         this._memberService = _memberService;
         this._taskService = _taskService;
+        this.members = [];
+        this.tasks = [];
+        this.year = new Date().getFullYear().toString();
+        this.month = new Date().getMonth().toString();
         this.months = [
             'Januari',
             'Februari',
@@ -251,24 +254,25 @@ var ScheduleComponent = (function () {
             'November',
             'December',
         ];
-        this.members = [];
+    }
+    ScheduleComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this._memberService.getAllMembers().subscribe(function (data) {
             if (data.success) {
-                _this.members = [];
                 for (var i = 0; i < data.members.length; i++) {
                     var member = data.members[i];
                     _this.members.push(member);
-                    console.log(member);
                 }
             }
         });
-    }
-    ScheduleComponent.prototype.ngOnInit = function () {
-        this.members = [];
-        this.year = new Date().getFullYear().toString();
-        this.month = new Date().getMonth().toString();
-        this.tasks = this._taskService.getAllTasks();
-        this._memberService.getAllMembers();
+        this._taskService.getAllTasks().subscribe(function (data) {
+            if (data.success) {
+                for (var i = 0; i < data.tasks.length; i++) {
+                    var task = data.tasks[i].name;
+                    _this.tasks.push(task);
+                }
+            }
+        });
     };
     ScheduleComponent.prototype.genereteTaskList = function () {
         var taskListRet = this.tasks;
@@ -383,28 +387,6 @@ var MemberService = (function () {
     function MemberService(http) {
         this.http = http;
         this.baseUrl = __WEBPACK_IMPORTED_MODULE_2__globals_globals__["a" /* localhostUrl */] + 'api/members/';
-        this.members = [
-            {
-                firstName: 'Joline',
-                lastName: 'Schikan',
-            },
-            {
-                firstName: 'Hampus',
-                lastName: 'Ågren',
-            },
-            {
-                firstName: 'Linnea',
-                lastName: 'Ramne',
-            },
-            {
-                firstName: 'Iris',
-                lastName: 'Minö',
-            },
-            {
-                firstName: 'Jesper',
-                lastName: 'Thörnberg',
-            }
-        ];
     }
     MemberService.prototype.createUser = function (userToCreate) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
@@ -417,7 +399,6 @@ var MemberService = (function () {
     };
     MemberService.prototype.getAllMembers = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
-        console.log('inside create-FE' + this.baseUrl + 'create');
         return this.http.get(this.baseUrl, { headers: headers }).map(function (res) { return res.json(); });
         ;
     };
@@ -482,7 +463,9 @@ var MemberService = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TaskService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals_globals__ = __webpack_require__("../../../../../src/app/globals/globals.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -493,25 +476,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-/* import { Http, Headers } from '@angular/http'; */
+
+
 
 var TaskService = (function () {
-    function TaskService() {
-        this.baseUrl = 'api/users/';
-        this.tasks = [
+    function TaskService(http) {
+        this.http = http;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_2__globals_globals__["a" /* localhostUrl */] + 'api/tasks/';
+        /* this.tasks = [
             'köket',
             'tvätt',
             'stora-badrummet',
             'lilla-badrummen',
             'damsuga',
-        ];
+        ]; */
     }
     TaskService.prototype.getAllTasks = function () {
-        return this.tasks;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        return this.http.get(this.baseUrl, { headers: headers }).map(function (res) { return res.json(); });
+        ;
     };
     TaskService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], TaskService);
     return TaskService;
 }());
