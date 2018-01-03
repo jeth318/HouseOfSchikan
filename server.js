@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.json());
 
 // Api Routes
-const routes = require('./routes');
+const routes = require('./api-routes');
 app.use('/', routes);
 
 // Index Route

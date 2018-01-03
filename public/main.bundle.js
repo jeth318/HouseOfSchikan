@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header></app-header>\n<app-schedule></app-schedule>\n"
+module.exports = "<app-header></app-header>\n<app-admin></app-admin>\n<app-schedule></app-schedule>\n"
 
 /***/ }),
 
@@ -86,12 +86,14 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_member_service__ = __webpack_require__("../../../../../src/app/services/member.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_task_service__ = __webpack_require__("../../../../../src/app/services/task.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_admin_admin_component__ = __webpack_require__("../../../../../src/app/components/admin/admin.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -108,7 +110,8 @@ var AppModule = (function () {
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_3__components_schedule_schedule_component__["a" /* ScheduleComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__components_header_header_component__["a" /* HeaderComponent */]
+                __WEBPACK_IMPORTED_MODULE_4__components_header_header_component__["a" /* HeaderComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__components_admin_admin_component__["a" /* AdminComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -119,6 +122,81 @@ var AppModule = (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/admin/admin.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/admin/admin.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div>\n  <a href=\"#\" (click)=\"createMember()\">CREATE MEMBER!</a>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/admin/admin.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AdminComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_member_service__ = __webpack_require__("../../../../../src/app/services/member.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AdminComponent = (function () {
+    function AdminComponent(_memberService) {
+        this._memberService = _memberService;
+    }
+    AdminComponent.prototype.ngOnInit = function () {
+    };
+    AdminComponent.prototype.createMember = function () {
+        this._memberService.createMember({ priority: 6, firstName: 'Sven', lastName: 'Testsson' })
+            .subscribe(function (data) {
+            if (data.success) {
+                console.log('YEY');
+            }
+            else {
+                console.error(data);
+            }
+        });
+    };
+    AdminComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-admin',
+            template: __webpack_require__("../../../../../src/app/components/admin/admin.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/admin/admin.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_member_service__["a" /* MemberService */]])
+    ], AdminComponent);
+    return AdminComponent;
 }());
 
 
@@ -355,7 +433,7 @@ var ScheduleComponent = (function () {
 /* unused harmony export messageActive */
 // Globala Variabler
 // OBS! om localhost, sätt localhostUrl = "http://localhost:8080/", annars "";
-var localhostUrl = "/";
+var localhostUrl = "http://localhost:8080/";
 var messageActive = false;
 
 
@@ -388,58 +466,57 @@ var MemberService = (function () {
         this.http = http;
         this.baseUrl = __WEBPACK_IMPORTED_MODULE_2__globals_globals__["a" /* localhostUrl */] + 'api/members/';
     }
-    MemberService.prototype.createUser = function (userToCreate) {
+    MemberService.prototype.createMember = function (memberToCreate) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
-        //headers.append('Authorization', token);
         console.log('inside create-FE' + this.baseUrl + 'create');
         var body = {
-            userToCreate: userToCreate
+            memberToCreate: memberToCreate
         };
-        return this.http.post(this.baseUrl + 'create', body);
+        return this.http.post(this.baseUrl + 'create', body, { headers: headers }).map(function (res) { return res.json(); });
     };
     MemberService.prototype.getAllMembers = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         return this.http.get(this.baseUrl, { headers: headers }).map(function (res) { return res.json(); });
         ;
     };
-    MemberService.prototype.getUserById = function (id, token) {
+    MemberService.prototype.getMemberById = function (id, token) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Authorization', token);
         return this.http.get(this.baseUrl + id, { headers: headers }).map(function (res) { return res.json(); });
     };
-    MemberService.prototype.updateUserName = function (userToUpdate, token, updaterId) {
+    MemberService.prototype.updateMemberName = function (memberToUpdate, token, updaterId) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Authorization', token);
         var body = {
-            userToUpdate: userToUpdate,
+            memberToUpdate: memberToUpdate,
             updaterId: updaterId
         };
         return this.http.put(this.baseUrl + 'update/name', body, { headers: headers }).map(function (res) { return res.json(); });
     };
-    MemberService.prototype.updateUserEmail = function (userToUpdate, token, updaterId) {
+    MemberService.prototype.updateMemberEmail = function (memberToUpdate, token, updaterId) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Authorization', token);
         var body = {
-            userToUpdate: userToUpdate,
+            memberToUpdate: memberToUpdate,
             updaterId: updaterId
         };
         return this.http.put(this.baseUrl + 'update/email', body, { headers: headers }).map(function (res) { return res.json(); });
     };
-    MemberService.prototype.updateUserAccess = function (userToUpdate, token, updaterId, password) {
+    MemberService.prototype.updateMemberAccess = function (memberToUpdate, token, updaterId, password) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Authorization', token);
         var body = {
-            userToUpdate: userToUpdate,
+            memberToUpdate: memberToUpdate,
             updaterId: updaterId,
             password: 'aa',
         };
         return this.http.put(this.baseUrl + 'update/access', body, { headers: headers }).map(function (res) { return res.json(); });
     };
-    MemberService.prototype.updateUserPassword = function (userToUpdate, token, updaterId, oldPassword, newPassword) {
+    MemberService.prototype.updateMemberPassword = function (memberToUpdate, token, updaterId, oldPassword, newPassword) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Authorization', token);
         var body = {
-            userToUpdate: userToUpdate,
+            memberToUpdate: memberToUpdate,
             updaterId: updaterId,
             password: 'aa',
             newPassword: 'aa'

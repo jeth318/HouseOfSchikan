@@ -24,8 +24,8 @@ router.get('/:id', (req,res,next)=>{
 
 router.post('/create', (req,res,next)=>{
     console.log('INSIDE CREATE');
-    MemberModel.createMember(req.body.userToCreate, (err, member)=>{
-        console.log(req.body);
+    MemberModel.createMember(req.body.memberToCreate, (err, member)=>{
+        console.log('SUPERINSIDE');
         res.json({
             success: err === null,
             err,
@@ -35,7 +35,7 @@ router.post('/create', (req,res,next)=>{
 });
 
 router.put('/update/name', (req,res,next)=>{
-    MemberModel.updateMemberName(req.body.userToUpdate, (err, member) => {
+    MemberModel.updateMemberName(req.body.memberToUpdate, (err, member) => {
         res.json({
             success: err === null,
             err,
@@ -45,7 +45,7 @@ router.put('/update/name', (req,res,next)=>{
 });
 
 router.delete('/delete', (req,res,next)=>{
-    MemberModel.deleteMember(req.body.userToDeleteId, (err,member)=>{
+    MemberModel.deleteMember(req.body.memberToDeleteId, (err,member)=>{
         res.json({
             success: err === null,
             err,

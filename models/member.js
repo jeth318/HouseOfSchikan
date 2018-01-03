@@ -1,11 +1,12 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let userNotFoundError = new Error();
-userNotFoundError.title = "userNotFoundError";
-userNotFoundError.message = "Member found not found";
+let memberNotFoundError = new Error();
+memberNotFoundError.title = "memberNotFoundError";
+memberNotFoundError.message = "Member found not found";
 
 let MemberSchema = new Schema({
+    priority: {type: Number, required: false},
     firstname: {type: String, required: true},
     lastname: {type: String, required: true}
 });
@@ -33,22 +34,23 @@ module.exports.getAllMembers = function(callback){
     MemberModel.find().sort('priority').exec(callback);
 }
 
-module.exports.createMember = function(userToCreate, callback){
-    MemberModel.create(userToCreate, callback);
+module.exports.createMember = function(memberToCreate, callback){
+    console.log(memberToCreate);
+    MemberModel.create(memberToCreate, callback);
 }
 
-module.exports.updateMemberName = function(userToUpdate, callback){
-    MemberModel.findById(userToUpdate._id, (err, user) => {
+module.exports.updateMemberName = function(memberToUpdate, callback){
+    MemberModel.findById(memberToUpdate._id, (err, member) => {
         if(err) {
             callback(err);
         }
-        else if(!user) {
-            callback(userNotFoundError);
+        else if(!member) {
+            callback(memberNotFoundError);
         }
         else {
-            user.firstname = userToUpdate.firstname;
-            user.lastname  = userToUpdate.lastname;
-            user.save(callback);
+            member.firstname = memberToUpdate.firstname;
+            member.lastname  = memberToUpdate.lastname;
+            member.save(callback);
         }
     });
 }

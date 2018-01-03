@@ -11,62 +11,61 @@ export class MemberService {
    }
    public members: any;
 
-   createUser(userToCreate) {
+   createMember(memberToCreate) {
     let headers = new Headers();
-    //headers.append('Authorization', token);
     console.log('inside create-FE' + this.baseUrl+'create');
     let body = {
-      userToCreate
+      memberToCreate
     };
-    return this.http.post(this.baseUrl+'create', body);
+    return this.http.post(this.baseUrl+'create', body, {headers}).map(res => res.json());
   }
   getAllMembers() {
     let headers = new Headers();
     return this.http.get(this.baseUrl, {headers: headers}).map(res => res.json());;
   }
 
-  getUserById(id, token) {
+  getMemberById(id, token) {
     let headers = new Headers();
     headers.append('Authorization', token); 
     return this.http.get(this.baseUrl+id, {headers: headers}).map(res => res.json());
   }
 
-  updateUserName(userToUpdate, token, updaterId) {
+  updateMemberName(memberToUpdate, token, updaterId) {
     let headers = new Headers();
     headers.append('Authorization', token);
     let body = { 
-      userToUpdate,
+      memberToUpdate,
       updaterId
     };
     return this.http.put(this.baseUrl+'update/name', body, {headers}).map(res => res.json());
   }
 
-  updateUserEmail(userToUpdate, token, updaterId){
+  updateMemberEmail(memberToUpdate, token, updaterId){
     let headers = new Headers();
     headers.append('Authorization', token);
     let body = { 
-      userToUpdate,
+      memberToUpdate,
       updaterId
     };
     return this.http.put(this.baseUrl+'update/email', body, {headers}).map(res => res.json());
   }
 
-  updateUserAccess(userToUpdate, token, updaterId, password) {
+  updateMemberAccess(memberToUpdate, token, updaterId, password) {
     let headers = new Headers();
     headers.append('Authorization', token);
     let body = { 
-      userToUpdate,
+      memberToUpdate,
       updaterId,
       password: 'aa',
     };
     return this.http.put(this.baseUrl+'update/access', body, {headers}).map(res => res.json());
   }
 
-  updateUserPassword(userToUpdate, token, updaterId, oldPassword, newPassword) {
+  updateMemberPassword(memberToUpdate, token, updaterId, oldPassword, newPassword) {
     let headers = new Headers();
     headers.append('Authorization', token);
     let body = { 
-      userToUpdate,
+      memberToUpdate,
       updaterId,
       password: 'aa',
       newPassword: 'aa'

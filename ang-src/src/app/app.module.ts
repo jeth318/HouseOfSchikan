@@ -7,13 +7,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { MemberService } from './services/member.service';
 import { TaskService } from './services/task.service';
 import { HttpModule } from '@angular/http';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ScheduleComponent,
-    HeaderComponent
+    HeaderComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
