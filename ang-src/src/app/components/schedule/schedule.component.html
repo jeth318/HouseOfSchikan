@@ -13,7 +13,7 @@
   <table class="task-table">
     <tbody *ngFor="let month of months; let monthIndex = index; let even = even;">
       <tr class="month-mobile">
-        <td colSpan="{{getMembersLenth()}}" class="month-mobile">{{month}}</td>
+        <td colSpan="{{getMembersLength()}}" class="month-mobile">{{month}}</td>
       </tr>
       <tr class="{{currentMonth(monthIndex)? 'current' : ''}}">
         <td class="month">{{month}}</td>

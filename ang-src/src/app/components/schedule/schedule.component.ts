@@ -3,8 +3,9 @@ import { MemberService } from '../../services/member.service';
 import { TaskService } from '../../services/task.service';
 
 interface Member {
-  firstName: String;
-  lastName: String;
+    _id: Number;
+    firstName: String;
+    lastName: String;
 }
 
 @Component({
@@ -29,18 +30,30 @@ export class ScheduleComponent implements OnInit {
             'November',
             'December',
         ];
+        this.members = [];
+        this._memberService.getAllMembers().subscribe((data)=>{    
+            if(data.success){
+              this.members = [];
+              for (var i = 0; i < data.members.length; i++) {
+                let member = data.members[i];
+                this.members.push(member);
+                console.log(member);
+              }
+            }    
+          });
     }
 
     ngOnInit() {
+        
+        this.members = [];          
         this.year = new Date().getFullYear().toString();
         this.month = new Date().getMonth().toString();
-        this.members = [];
         this.tasks = this._taskService.getAllTasks();
-        this._memberService.getAllMembers();                
+        this._memberService.getAllMembers();              
     }
 
     public tasks: any;
-    public members: Member[];
+    public members: any[];
     public months: String[];
     public year: String;
     public month: String;
@@ -93,7 +106,7 @@ export class ScheduleComponent implements OnInit {
         return newArr[monthIndex];
     }
 
-    public getMembersLenth() {
+    public getMembersLength() {
         return this.members.length;
     }
 

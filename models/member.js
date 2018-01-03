@@ -30,7 +30,7 @@ module.exports.getMemberById = function(id, callback){
 }
 
 module.exports.getAllMembers = function(callback){
-    MemberModel.find();
+    MemberModel.find().sort('priority').exec(callback);
 }
 
 module.exports.createMember = function(userToCreate, callback){

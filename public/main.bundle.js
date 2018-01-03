@@ -208,7 +208,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/schedule/schedule.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui centered grid table-wrapper\">\n  <table class=\"thead-table\">\n    <thead>\n      <tr>\n        <th class=\"month\">{{year}}</th>\n        <th *ngFor=\"let member of members; let i = index; let even = even;\" class=\"member-mobile\">{{getInitials(i)}}</th>\n        <th  *ngFor=\"let member of members; let i = index; let even = even;\" class=\"member\">{{member.firstName}}</th>\n      </tr>\n    </thead>\n  </table>\n</div>\n<div class=\"ui centered grid table-wrapper table-wrapper-inner\">\n  <table class=\"task-table\">\n    <tbody *ngFor=\"let month of months; let monthIndex = index; let even = even;\">\n      <tr class=\"month-mobile\">\n        <td colSpan=\"{{getMembersLenth()}}\" class=\"month-mobile\">{{month}}</td>\n      </tr>\n      <tr class=\"{{currentMonth(monthIndex)? 'current' : ''}}\">\n        <td class=\"month\">{{month}}</td>\n        <td class=\"icon\" *ngFor=\"let member of members; let i = index; let even = even;\">\n          <img class=\"icon-img\" *ngFor=\"let task of renderTaskList(i, monthIndex)\" src=\"assets/images/{{task}}.png\" />\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
+module.exports = "<div class=\"ui centered grid table-wrapper\">\n  <table class=\"thead-table\">\n    <thead>\n      <tr>\n        <th class=\"month\">{{year}}</th>\n        <th *ngFor=\"let member of members; let i = index; let even = even;\" class=\"member-mobile\">{{getInitials(i)}}</th>\n        <th  *ngFor=\"let member of members; let i = index; let even = even;\" class=\"member\">{{member.firstName}}</th>\n      </tr>\n    </thead>\n  </table>\n</div>\n<div class=\"ui centered grid table-wrapper table-wrapper-inner\">\n  <table class=\"task-table\">\n    <tbody *ngFor=\"let month of months; let monthIndex = index; let even = even;\">\n      <tr class=\"month-mobile\">\n        <td colSpan=\"{{getMembersLength()}}\" class=\"month-mobile\">{{month}}</td>\n      </tr>\n      <tr class=\"{{currentMonth(monthIndex)? 'current' : ''}}\">\n        <td class=\"month\">{{month}}</td>\n        <td class=\"icon\" *ngFor=\"let member of members; let i = index; let even = even;\">\n          <img class=\"icon-img\" *ngFor=\"let task of renderTaskList(i, monthIndex)\" src=\"assets/images/{{task}}.png\" />\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
 
 /***/ }),
 
@@ -234,6 +234,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ScheduleComponent = (function () {
     function ScheduleComponent(_memberService, _taskService) {
+        var _this = this;
         this._memberService = _memberService;
         this._taskService = _taskService;
         this.months = [
@@ -250,11 +251,22 @@ var ScheduleComponent = (function () {
             'November',
             'December',
         ];
+        this.members = [];
+        this._memberService.getAllMembers().subscribe(function (data) {
+            if (data.success) {
+                _this.members = [];
+                for (var i = 0; i < data.members.length; i++) {
+                    var member = data.members[i];
+                    _this.members.push(member);
+                    console.log(member);
+                }
+            }
+        });
     }
     ScheduleComponent.prototype.ngOnInit = function () {
+        this.members = [];
         this.year = new Date().getFullYear().toString();
         this.month = new Date().getMonth().toString();
-        this.members = [];
         this.tasks = this._taskService.getAllTasks();
         this._memberService.getAllMembers();
     };
@@ -303,7 +315,7 @@ var ScheduleComponent = (function () {
         newArr.reverse();
         return newArr[monthIndex];
     };
-    ScheduleComponent.prototype.getMembersLenth = function () {
+    ScheduleComponent.prototype.getMembersLength = function () {
         return this.members.length;
     };
     ScheduleComponent.prototype.shortMonth = function (index) {
@@ -404,7 +416,9 @@ var MemberService = (function () {
         return this.http.post(this.baseUrl + 'create', body);
     };
     MemberService.prototype.getAllMembers = function () {
-        return this.http.get('http://localhost:8080/api/members/');
+        console.log('inside create-FE' + this.baseUrl + 'create');
+        return this.http.get('http://localhost:8080/api/members/').map(function (res) { return res.json(); });
+        ;
     };
     MemberService.prototype.getUserById = function (id, token) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();

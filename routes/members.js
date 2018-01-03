@@ -11,7 +11,7 @@ router.get('/', (req,res,next)=>{
             err,
             members
         });
-    })
+    });
 });
 
 router.get('/:id', (req,res,next)=>{
@@ -37,23 +37,23 @@ router.post('/create', (req,res,next)=>{
 });
 
 router.put('/update/name', (req,res,next)=>{
-        MemberModel.updateMemberName(req.body.userToUpdate, (err, member) => {
-            res.json({
-                success: err === null,
-                err,
-                member
-            });
+    MemberModel.updateMemberName(req.body.userToUpdate, (err, member) => {
+        res.json({
+            success: err === null,
+            err,
+            member
         });
+    });
 });
 
 router.delete('/delete', (req,res,next)=>{
-        MemberModel.deleteMember(req.body.userToDeleteId, (err,member)=>{
-            res.json({
-                success: err === null,
-                err,
-                member
-            });  
-        });
+    MemberModel.deleteMember(req.body.userToDeleteId, (err,member)=>{
+        res.json({
+            success: err === null,
+            err,
+            member
+        });  
+    });
 });
 
 module.exports = router;
