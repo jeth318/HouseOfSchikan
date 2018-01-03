@@ -43,8 +43,9 @@ export class MemberService {
     return this.http.post(this.baseUrl+'create', body);
   }
   getAllMembers() {
+    let headers = new Headers();
     console.log('inside create-FE' + this.baseUrl+'create');
-    return this.http.get('http://localhost:8080/api/members/').map(res => res.json());;
+    return this.http.get('http://localhost:8080/api/members/', {headers: headers}).map(res => res.json());;
   }
 
   getUserById(id, token) {

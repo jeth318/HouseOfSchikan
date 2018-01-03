@@ -416,8 +416,9 @@ var MemberService = (function () {
         return this.http.post(this.baseUrl + 'create', body);
     };
     MemberService.prototype.getAllMembers = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         console.log('inside create-FE' + this.baseUrl + 'create');
-        return this.http.get('http://localhost:8080/api/members/').map(function (res) { return res.json(); });
+        return this.http.get('http://localhost:8080/api/members/', { headers: headers }).map(function (res) { return res.json(); });
         ;
     };
     MemberService.prototype.getUserById = function (id, token) {
