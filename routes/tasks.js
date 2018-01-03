@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const TaskModel = require('../models/task');
 const secret = require('../config/config').secret;
-console.log('tasks');
 
 router.get('/', (req,res,next)=>{
-    console.log('tjena');
     TaskModel.getAllTasks((err, tasks)=>{
         res.json({
             success: err === null,

@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const MemberModel = require('../models/member');
 const secret = require('../config/config').secret;
-console.log('memb');
 
 router.get('/', (req,res,next)=>{
-    console.log('tjena');
     MemberModel.getAllMembers((err, members)=>{
         res.json({
             success: err === null,
