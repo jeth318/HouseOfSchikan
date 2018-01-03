@@ -38,8 +38,6 @@ app.get('/',(req,res)=>{
     res.send('<h1>Invalid Endpoint</h1>');
 });
 
-app.use('/uploads', express.static(__dirname + '/uploads'));
-
 app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
