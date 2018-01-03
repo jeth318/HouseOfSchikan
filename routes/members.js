@@ -6,6 +6,7 @@ console.log('memb');
 router.get('/', (req,res,next)=>{
     console.log('tjena');
     MemberModel.getAllMembers((err, members)=>{
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json({
             success: err === null,
             err,
