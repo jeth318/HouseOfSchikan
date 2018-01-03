@@ -45,8 +45,10 @@ app.get('*',(req,res)=>{
 });
 
 
+app.set('port', port);
+
 // Start server localhost
-const server = app.listen(port,(err)=>{
+app.listen(port,(err)=>{
     err ? console.log('Failed to start server: ', err) 
         : console.log('Server started on port => '+port);
 });
