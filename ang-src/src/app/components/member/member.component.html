@@ -1,4 +1,11 @@
 <div class="ui container member-area">
+  <div class="ui one columns grid centered stackable">
+    <div class="column">
+        <button type="button" class="ui button primary "(click)="toggleCrudView()">{{settingsText}}</button>
+    </div>
+  </div>
+</div>
+<div class="ui container member-area" *ngIf="showMembersArea==true">
     <div class="ui two columns grid centered stackable">
       <div class="column">
           <table class="ui striped table unstackable">
