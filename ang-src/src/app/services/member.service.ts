@@ -24,18 +24,15 @@ export class MemberService {
     return this.http.get(this.baseUrl, {headers: headers}).map(res => res.json());;
   }
 
-  getMemberById(id, token) {
+  getMemberById(id) {
     let headers = new Headers();
-    headers.append('Authorization', token); 
     return this.http.get(this.baseUrl+id, {headers: headers}).map(res => res.json());
   }
 
-  updateMemberName(memberToUpdate, token, updaterId) {
+  updateMemberName(memberToUpdate) {
     let headers = new Headers();
-    headers.append('Authorization', token);
     let body = { 
       memberToUpdate,
-      updaterId
     };
     return this.http.put(this.baseUrl+'update/name', body, {headers}).map(res => res.json());
   }
@@ -72,4 +69,12 @@ export class MemberService {
     };
     return this.http.put(this.baseUrl+'update/password', body, {headers}).map(res => res.json());
   }
+  deleteMember(memberToDeleteId) { 
+    let headers = new Headers();
+    let body = {
+      memberToDeleteId
+    };
+    return this.http.delete(this.baseUrl+'delete', {body, headers}).map(res => res.json());
+  }
 }
+

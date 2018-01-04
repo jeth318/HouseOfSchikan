@@ -1,0 +1,23 @@
+.member-area{
+    font-size: 1.5rem;
+    margin-top: 40px;
+}
+.member-area form{
+    font-size: 1.5rem;
+}
+
+.flash {
+    font-family: 'Indie Flower', cursive;
+}
+
+h3 {
+    font-size: 2rem !important;
+    font-family: 'Indie Flower', cursive !important;
+}
+
+.modal-invisible {
+    display: none;
+}
+.modal-invisible {
+    display: all;
+}

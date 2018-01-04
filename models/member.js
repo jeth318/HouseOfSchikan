@@ -35,6 +35,7 @@ module.exports.getAllMembers = function(callback){
 }
 
 module.exports.createMember = function(memberToCreate, callback){
+    console.log('inside model');
     console.log(memberToCreate);
     MemberModel.create(memberToCreate, callback);
 }
@@ -48,8 +49,9 @@ module.exports.updateMemberName = function(memberToUpdate, callback){
             callback(memberNotFoundError);
         }
         else {
-            member.firstname = memberToUpdate.firstname;
-            member.lastname  = memberToUpdate.lastname;
+            member.priority  = memberToUpdate.priority;
+            member.firstName = memberToUpdate.firstName;
+            member.lastName  = memberToUpdate.lastName;
             member.save(callback);
         }
     });

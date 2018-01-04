@@ -3,6 +3,10 @@
     src: url('/assets/fonts/KraftNine.ttf') format('truetype');
 }
 
+html {
+    background-color: darkslategrey;
+}
+
 /* ----- BODY ------*/
 body {
     font-family: 'Indie Flower', cursive;
