@@ -10,6 +10,7 @@ import { TaskService } from './services/task.service';
 import { HttpModule } from '@angular/http';
 import { AdminComponent } from './components/admin/admin.component';
 import { MemberComponent } from './components/member/member.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MemberComponent } from './components/member/member.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     FormsModule
   ],

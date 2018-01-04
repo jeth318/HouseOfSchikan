@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, style } from '@angular/core';
 import { MemberService } from '../../services/member.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
-  styleUrls: ['./member.component.css']
+  styleUrls: ['./member.component.css'],
 })
 export class MemberComponent implements OnInit {
 
   constructor(private _memberService: MemberService) {
+    this.isDataReady = false;
     this.members = [];
     this.firstName = '';
     this.lastName = '';
@@ -19,8 +21,7 @@ export class MemberComponent implements OnInit {
     this.modalVisible = false;
     this.showMembersArea = false;
     this.settingsText = 'Visa inställningar';
-    this.showMembersArea ? this.settingsText == 'Göm inställningar' : 'Visa inställningar';
-    
+    this.showMembersArea ? this.settingsText == 'Göm inställningar' : 'Visa inställningar';    
    }
   public addMember: Boolean;  
   public description: String;
@@ -32,12 +33,25 @@ export class MemberComponent implements OnInit {
   public modalVisible: Boolean;
   public showMembersArea: Boolean;
   public settingsText: String;
+  public isDataReady: Boolean;
 
   ngOnInit() {
-    this.getAllMembers();
+    this.fetchEvent().then(()=>{
+      this.isDataReady = true;
+    });
   }
 
-  toggleCrudView(){
+  fetchEvent(){
+    return new Promise((resolve, reject) => {
+      this._memberService.getAllMembers().subscribe((data) => {
+        if (data.success) {
+            this.members = data.members;
+            resolve();
+        }
+    });
+  });
+ }
+  toggleSettings(){
     this.showMembersArea = !this.showMembersArea;
     if (this.showMembersArea) {
       this.settingsText = 'Göm inställningar';
@@ -47,7 +61,6 @@ export class MemberComponent implements OnInit {
   }
 
   getAllMembers(){
-    console.log(this.memberModel);
     this._memberService.getAllMembers().subscribe((data) => {
       if (data.success) {
           this.members = data.members;
@@ -58,8 +71,12 @@ export class MemberComponent implements OnInit {
   selectedMember(id){
     this.modalVisible = true;
     this.addMember = false;
-     this._memberService.getMemberById(id).subscribe((data)=> {
-       this.memberModel = data.member;
+    this.members.forEach((memb, i) => {
+      if (memb._id === id) {
+        console.log(this.members[i]);
+        this.memberModel = this.members[i];
+        return;
+      }
     });
   }
 
@@ -104,14 +121,15 @@ export class MemberComponent implements OnInit {
     this.addMember = true;
     this.modalVisible = true; 
     this.getAllMembers();    
-    this.memberModel = {};               
+    this.memberModel = {}; 
+    this.animateCol();              
   }
 
   addNew(){
     this.isLoading = true;
     this.memberModel.priority = this.members.length+1;
     this._memberService.createMember(this.memberModel).subscribe(
-      (data) => {console.log('Tjena')},
+      (data) => {},
       (error) => {},
       () => { 
         this.getAllMembers();
@@ -121,4 +139,9 @@ export class MemberComponent implements OnInit {
       }
     )
   }
+
+  animateCol(){
+    $('.roomies-table').animate({'height':'300px'});
+  }
 }
+

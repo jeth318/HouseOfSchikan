@@ -1,3 +1,12 @@
-<app-header></app-header>
-<app-schedule></app-schedule>
-<app-member></app-member>
+<div class="ui container">
+    Loading
+        <app-header></app-header>    
+    <div [ngClass]="showSettings==true ? 'ui two columns grid centered stackable' : 'ui one columns grid centered stackable'">
+            <div class="column">
+                    <app-member></app-member>
+                </div>
+        <div class="column">
+            <app-schedule></app-schedule>
+        </div>
+    </div>
+</div>

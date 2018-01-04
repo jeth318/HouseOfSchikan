@@ -42,6 +42,7 @@ th.month {
     width: 90px;
     font-size: 2rem;
     background-color: #7a2e85;
+    border-top-left-radius: 5px;
     color: white;
     display: all;    
 }

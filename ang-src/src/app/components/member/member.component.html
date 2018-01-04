@@ -1,10 +1,10 @@
-<div class="ui container member-area">
-  <div class="ui one columns grid centered stackable">
-    <div class="column">
-        <button type="button" class="ui button primary "(click)="toggleCrudView()">{{settingsText}}</button>
+<div class="ui container">
+    <div class="ui one columns grid right stackable">
+      <div class="column" *ngIf="isDataReady">
+          <button type="button" class="ui button primary settingsBtn"(click)="toggleSettings()"><i class="settings icon"></i>{{settingsBtnText}}</button>
+      </div>
     </div>
   </div>
-</div>
 <div class="ui container member-area" *ngIf="showMembersArea==true">
     <div class="ui two columns grid centered stackable">
       <div class="column">
@@ -50,7 +50,14 @@
                 <form class="ui form">
                   <div class="field required">
                     <label for="name">Förnamn</label>
-                    <input type="text" class="form-control" id="forname" [(ngModel)]="memberModel.firstName" name="firstname">
+                    <input 
+                      
+                      type="text" 
+                      class="form-control" 
+                      id="forname" 
+                      [(ngModel)]="memberModel.firstName" 
+                      name="firstname"
+                    >
                   </div>
                   <div class="field required">
                     <label for="id">Efternamn</label>
@@ -68,7 +75,12 @@
                                         
                   </div>
                   <div *ngIf="addMember==true">
-                    <button type="button" [ngClass]="isLoading==true ? 'ui button primary disabled' : 'ui button primary'" (click)="addNew()">Spara</button>
+                    <button 
+                      type="button" 
+                      class="ui button primary"
+                      [ngClass]="isLoading==true? 'disabled' : ''"
+                      (click)="addNew()">Spara
+                    </button>
                     <span *ngIf="isLoading==true" class="flash flash-loading" >Laddar...</span>
                     <span *ngIf="successMessage" class="ui header green flash flash-success">{{successMessage}}</span>
                     <span *ngIf="errorMessage" class="ui header red flash flash-fail">{{errorMessage}}</span >
