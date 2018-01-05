@@ -20,8 +20,8 @@ export class MemberComponent implements OnInit {
     this.isLoading = false;
     this.modalVisible = false;
     this.showMembersArea = false;
-    this.settingsText = 'Visa inställningar';
-    this.showMembersArea ? this.settingsText == 'Göm inställningar' : 'Visa inställningar';    
+    this.settingsText = 'Hantera roomies';
+    this.showMembersArea ? this.settingsText == 'Göm inställningar' : 'Hantera roomies';    
    }
   public addMember: Boolean;  
   public description: String;
@@ -73,7 +73,6 @@ export class MemberComponent implements OnInit {
     this.addMember = false;
     this.members.forEach((memb, i) => {
       if (memb._id === id) {
-        console.log(this.members[i]);
         this.memberModel = this.members[i];
         return;
       }
@@ -90,6 +89,7 @@ export class MemberComponent implements OnInit {
         this.isLoading = false;
         this.memberModel = {};
         this.modalVisible = false;
+        
       });
   }
 
@@ -100,7 +100,7 @@ export class MemberComponent implements OnInit {
     if (r == true) {
         txt = "You pressed OK!";
         this._memberService.deleteMember(this.memberModel._id).subscribe(
-          (data) => {console.log('Tjena')},
+          (data) => {},
           (error) => {},
           () => { 
             this.getAllMembers();
@@ -122,7 +122,11 @@ export class MemberComponent implements OnInit {
     this.modalVisible = true; 
     this.getAllMembers();    
     this.memberModel = {}; 
-    this.animateCol();              
+    }
+
+  cancel(){
+    this.memberModel = {};
+    this.modalVisible = false;
   }
 
   addNew(){
@@ -138,10 +142,6 @@ export class MemberComponent implements OnInit {
         this.modalVisible = false;        
       }
     )
-  }
-
-  animateCol(){
-    $('.roomies-table').animate({'height':'300px'});
   }
 }
 

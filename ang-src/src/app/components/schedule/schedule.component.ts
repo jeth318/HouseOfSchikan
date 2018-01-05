@@ -16,6 +16,7 @@ interface Member {
 export class ScheduleComponent implements OnInit {
 
     constructor(private _memberService: MemberService, private _taskService: TaskService) {
+        
         this.isDataReady = false;
         this.members = [];
         this.tasks = [];
@@ -35,45 +36,8 @@ export class ScheduleComponent implements OnInit {
             'November',
             'December',
         ]; 
-        /* this._memberService.getAllMembers().subscribe((data) => {
-            if (data.success) {
-                for (var i = 0; i < data.members.length; i++) {
-                    let member = data.members[i];
-                    this.members.push(member);
-                }
-            }
-        });
-
-        this._taskService.getAllTasks().subscribe((data) => {
-            if (data.success) {
-                for (var i = 0; i < data.tasks.length; i++) {
-                    let task = data.tasks[i].name;
-                    this.tasks.push(task);
-                }
-            }
-        }); */
     }
 
-    /* ngOnInit() {
-
-        this._memberService.getAllMembers().subscribe((data) => {
-            if (data.success) {
-                for (var i = 0; i < data.members.length; i++) {
-                    let member = data.members[i];
-                    this.members.push(member);
-                }
-            }
-        });
-
-        this._taskService.getAllTasks().subscribe((data) => {
-            if (data.success) {
-                for (var i = 0; i < data.tasks.length; i++) {
-                    let task = data.tasks[i].name;
-                    this.tasks.push(task);
-                }
-            }
-        });
-    } */
     ngOnInit() {
         this.fetchEvent().then(()=>{
           this.isDataReady = true;
@@ -82,13 +46,15 @@ export class ScheduleComponent implements OnInit {
     
       fetchEvent(){
         return new Promise((resolve, reject) => {
-            this._memberService.getAllMembers().subscribe((data) => {
+            this._memberService.getAllMembers()
+            .subscribe((data) => {
                 if (data.success) {
                     for (var i = 0; i < data.members.length; i++) {
                         let member = data.members[i];
                         this.members.push(member);
                     }
-                    this._taskService.getAllTasks().subscribe((data) => {
+                    this._taskService.getAllTasks()
+                    .subscribe((data) => {
                         if (data.success) {
                             for (var i = 0; i < data.tasks.length; i++) {
                                 let task = data.tasks[i].name;
@@ -98,9 +64,7 @@ export class ScheduleComponent implements OnInit {
                         }
                     });
                 }
-            });
-    
-            
+            });       
       });
      }
 
@@ -176,4 +140,6 @@ export class ScheduleComponent implements OnInit {
         return this.members[index].firstName.slice(0, 1) + '.'
             + this.members[index].lastName.slice(0, 1)
     }
+    
 }
+

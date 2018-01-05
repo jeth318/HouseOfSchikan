@@ -2,7 +2,7 @@ const router = require('express').Router();
 const TaskModel = require('../models/task');
 const secret = require('../config/config').secret;
 
-let tasks = [
+let tasksMock = [
     
     {
         id: '1',
@@ -27,40 +27,27 @@ let tasks = [
 ]
 
 router.get('/', (req,res,next)=>{
-   /*  TaskModel.getAllTasks((err, tasks)=>{
+    TaskModel.getAllTasks((err, tasks)=>{
         res.json({
             success: err === null,
             err,
             tasks
         });
-    }); */
-    res.json({
-        success: true,
-        err: 'Tjo',
-        tasks
     });
 });
 
 router.get('/:id', (req,res,next)=>{
-    /* TaskModel.getTaskById(req.params.id, (err, task)=>{
+    TaskModel.getTaskById(req.params.id, (err, task)=>{
         res.json({
             success: err === null,
             err,
             task
         });
-    }); */
-    let task = tasks[0];
-    res.json({
-        success: true,
-        err: 'NoErr',
-        task
     });
 });
 
 router.post('/create', (req,res,next)=>{
-    console.log('INSIDE CREATE');
     TaskModel.createTask(req.body.taskToCreate, (err, task)=>{
-        console.log(req.body);
         res.json({
             success: err === null,
             err,

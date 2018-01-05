@@ -35,7 +35,6 @@ module.exports.getAllMembers = function(callback){
 }
 
 module.exports.createMember = function(memberToCreate, callback){
-    console.log('inside model');
     console.log(memberToCreate);
     MemberModel.create(memberToCreate, callback);
 }

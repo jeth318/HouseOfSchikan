@@ -1,7 +1,7 @@
 <div class="ui container">
     <div class="ui one columns grid right stackable">
       <div class="column" *ngIf="isDataReady">
-          <button type="button" class="ui button primary settingsBtn"(click)="toggleSettings()"><i class="settings icon"></i>{{settingsBtnText}}</button>
+          <button type="button" class="ui button primary settingsBtn"(click)="toggleSettings()"><i class="settings icon"></i>{{settingsText}}</button>
       </div>
     </div>
   </div>
@@ -80,6 +80,12 @@
                       class="ui button primary"
                       [ngClass]="isLoading==true? 'disabled' : ''"
                       (click)="addNew()">Spara
+                    </button>
+                    <button 
+                      type="button" 
+                      class="ui button warning"
+                      [ngClass]="isLoading==true? 'disabled' : ''"
+                      (click)="cancel()">Avbryt
                     </button>
                     <span *ngIf="isLoading==true" class="flash flash-loading" >Laddar...</span>
                     <span *ngIf="successMessage" class="ui header green flash flash-success">{{successMessage}}</span>

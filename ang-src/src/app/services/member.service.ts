@@ -13,7 +13,6 @@ export class MemberService {
 
    createMember(memberToCreate) {
     let headers = new Headers();
-    console.log('inside create-FE' + this.baseUrl+'create');
     let body = {
       memberToCreate
     };

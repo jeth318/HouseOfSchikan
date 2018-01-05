@@ -43,11 +43,6 @@ router.get('/', (req,res,next)=>{
             members
         });    
     });
-    /* res.json({
-        success: true,
-        err: 'No error',
-        members
-    }); */
 });
 
 router.get('/:id', (req,res,next)=>{
@@ -58,18 +53,10 @@ router.get('/:id', (req,res,next)=>{
             member
         });
     });
-    /* let member = members[0];
-    res.json({
-        success: true,
-        err: 'NoErr',
-        member
-    }); */
 });
 
 router.post('/create', (req,res,next)=>{
-    console.log('INSIDE CREATE');
     MemberModel.createMember(req.body.memberToCreate, (err, member)=>{
-        console.log('SUPERINSIDE');
         res.json({
             success: err === null,
             err,
