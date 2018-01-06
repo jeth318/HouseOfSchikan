@@ -23,7 +23,7 @@ th {
     font-weight: 300; 
     color:white;
     background-color:rgba(0, 0, 0, 0.659);
-    border: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
     height: 40px;
 }
 
@@ -31,6 +31,13 @@ th.member {
     display: all;
     min-width: 80px;
     font-size: 1.7rem;
+    border-top-left-radius: 5px;
+
+}
+th.member:last-child {
+    border-top-right-radius: 5px;
+    border-right: none;
+
 }
 th.member-mobile {
     display: all;
@@ -43,6 +50,7 @@ th.month {
     font-size: 2rem;
     background-color: #7a2e85;
     border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     color: white;
     display: all;    
 }

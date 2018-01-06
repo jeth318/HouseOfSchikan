@@ -120,7 +120,6 @@ export class ScheduleComponent implements OnInit {
                 newArr.push(new Array(taskList[pointer]));
             }
         }
-        newArr.reverse();
         return newArr[monthIndex];
     }
 

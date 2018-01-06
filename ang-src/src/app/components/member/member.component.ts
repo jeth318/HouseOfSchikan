@@ -20,8 +20,8 @@ export class MemberComponent implements OnInit {
     this.isLoading = false;
     this.modalVisible = false;
     this.showMembersArea = false;
-    this.settingsText = 'Hantera roomies';
-    this.showMembersArea ? this.settingsText == 'Göm inställningar' : 'Hantera roomies';    
+    /* this.settingsText = 'Hantera roomies';
+    this.showMembersArea ? this.settingsText == 'Göm inställningar' : 'Hantera roomies';    */ 
    }
   public addMember: Boolean;  
   public description: String;
@@ -54,9 +54,9 @@ export class MemberComponent implements OnInit {
   toggleSettings(){
     this.showMembersArea = !this.showMembersArea;
     if (this.showMembersArea) {
-      this.settingsText = 'Göm inställningar';
+      this.settingsText = '';
     } else {
-      this.settingsText = 'Visa inställningar';
+      this.settingsText = '';
     }
   }
 
