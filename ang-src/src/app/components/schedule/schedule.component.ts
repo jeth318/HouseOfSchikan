@@ -15,6 +15,13 @@ interface Member {
 })
 export class ScheduleComponent implements OnInit {
 
+    public tasks: any[];
+    public members: any[];
+    public months: String[];
+    public year: String;
+    public month: String;
+    public isDataReady: Boolean;
+
     constructor(private _memberService: MemberService, private _taskService: TaskService) {
         
         this.isDataReady = false;
@@ -41,6 +48,8 @@ export class ScheduleComponent implements OnInit {
     ngOnInit() {
         this.fetchEvent().then(()=>{
           this.isDataReady = true;
+          console.log('NG-INIT: Members done')
+          
         });
       }
     
@@ -48,11 +57,14 @@ export class ScheduleComponent implements OnInit {
         return new Promise((resolve, reject) => {
             this._memberService.getAllMembers()
             .subscribe((data) => {
+                
                 if (data.success) {
                     for (var i = 0; i < data.members.length; i++) {
                         let member = data.members[i];
                         this.members.push(member);
                     }
+                    console.log('SCHEDULE: Members done');
+
                     this._taskService.getAllTasks()
                     .subscribe((data) => {
                         if (data.success) {
@@ -60,6 +72,7 @@ export class ScheduleComponent implements OnInit {
                                 let task = data.tasks[i].name;
                                 this.tasks.push(task);
                             }
+                    console.log('SCHEDULE: Tasks done');                          
                             resolve();
                         }
                     });
@@ -68,12 +81,7 @@ export class ScheduleComponent implements OnInit {
       });
      }
 
-    public tasks: any[];
-    public members: any[];
-    public months: String[];
-    public year: String;
-    public month: String;
-    public isDataReady: Boolean;
+   
 
     public genereteTaskList() {
         let taskListRet = this.tasks;

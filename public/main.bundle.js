@@ -208,7 +208,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".member-area{\n    margin-top: 0;\n    padding-top: 0;\n}\n.member-area form{\n    \n}\n\n.column{\n    padding-top: 0 !important;\n    transition: all linear 0.5s;\n}\n\n.no-border {\n  border: none;\n}\n\n.no-padding {\n    padding: 0;\n}\n\n.flash {\n    font-family: 'Indie Flower', cursive;\n}\n\nh3 {\n    font-size: 1.5rem !important;\n    font-family: 'Indie Flower', cursive !important;\n}\n\ntable td {\n    padding: 0.4rem;\n    text-align: left;\n}\n\ninput {\n    padding: 6px !important;\n    font-family: 'Indie Flower', cursive !important;    \n}\n\n.modal-invisible {\n    display: none;\n}\n.modal-invisible {\n    display: all;\n}\n\n.title {\n    background-color: #F9FAFB;\n}\n\n.settingsBtn {\n    position: absolute !important;\n    top: -60px !important;\n    right: 5px !important;\n    padding-right: 0px;\n    padding-left: 11px;\n    font-size: 1.3rem;\n    padding-top: 4px;\n    padding-bottom: 4px;   \n}\n\n.settingsBtn-icon {\n    opacity: 1 !important;\n}", ""]);
+exports.push([module.i, ".member-area{\n    margin-top: 0;\n    padding-top: 0;\n    font-size: 1.5rem;\n}\n.member-area form{\n    \n}\n\n.column{\n    padding-top: 0 !important;\n    transition: all linear 0.5s;\n}\n\n.no-border {\n  border: none;\n}\n\n.no-padding {\n    padding: 0;\n}\n\n.flash {\n    font-family: 'Indie Flower', cursive;\n}\n\nh3 {\n    font-size: 1.5rem !important;\n    font-family: 'Indie Flower', cursive !important;\n}\n\ntable td {\n    padding: 0.4rem;\n    text-align: left;\n}\n\ninput {\n    padding: 6px !important;\n    font-family: 'Indie Flower', cursive !important;    \n}\n\n.modal-invisible {\n    display: none;\n}\n.modal-invisible {\n    display: all;\n}\n\n.title {\n    background-color: #F9FAFB;\n}\n\n.settingsBtn {\n    position: absolute !important;\n    top: -60px !important;\n    right: 5px !important;\n    padding-right: 0px;\n    padding-left: 11px;\n    font-size: 1.3rem;\n    padding-top: 4px;\n    padding-bottom: 4px;   \n}\n\n.settingsBtn-icon {\n    opacity: 1 !important;\n}", ""]);
 
 // exports
 
@@ -442,6 +442,7 @@ var ScheduleComponent = (function () {
         var _this = this;
         this.fetchEvent().then(function () {
             _this.isDataReady = true;
+            console.log('NG-INIT: Members done');
         });
     };
     ScheduleComponent.prototype.fetchEvent = function () {
@@ -454,6 +455,7 @@ var ScheduleComponent = (function () {
                         var member = data.members[i];
                         _this.members.push(member);
                     }
+                    console.log('SCHEDULE: Members done');
                     _this._taskService.getAllTasks()
                         .subscribe(function (data) {
                         if (data.success) {
@@ -461,6 +463,7 @@ var ScheduleComponent = (function () {
                                 var task = data.tasks[i].name;
                                 _this.tasks.push(task);
                             }
+                            console.log('SCHEDULE: Tasks done');
                             resolve();
                         }
                     });
@@ -549,7 +552,7 @@ var ScheduleComponent = (function () {
 /* unused harmony export messageActive */
 // Globala Variabler
 // OBS! om localhost, sätt localhostUrl = "http://localhost:8080/", annars "";
-var localhostUrl = "/";
+var localhostUrl = '/';
 var messageActive = false;
 
 
@@ -581,6 +584,7 @@ var MemberService = (function () {
     function MemberService(http) {
         this.http = http;
         this.baseUrl = __WEBPACK_IMPORTED_MODULE_2__globals_globals__["a" /* localhostUrl */] + 'api/members/';
+        console.warn(this.baseUrl);
     }
     MemberService.prototype.createMember = function (memberToCreate) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
@@ -708,13 +712,17 @@ var TaskService = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_globals_globals__ = __webpack_require__("../../../../../src/app/globals/globals.ts");
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
+
 var environment = {
-    production: false
+    production: true
 };
+__WEBPACK_IMPORTED_MODULE_0__app_globals_globals__["a" /* localhostUrl */] === '/' ? environment.production = true : false;
+console.log("\u2264\u2264\u2264 Is Prodmode? " + environment.production);
 
 
 /***/ }),

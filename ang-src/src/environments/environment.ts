@@ -3,6 +3,12 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
+import {localhostUrl} from '../app/globals/globals';
+
 export const environment = {
-  production: false
+  production: true
 };
+
+localhostUrl === '/' ? environment.production = true : false;
+
+console.log(`≤≤≤ Is Prodmode? ${environment.production}`)

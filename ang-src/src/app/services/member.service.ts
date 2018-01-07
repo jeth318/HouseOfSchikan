@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import * as globals from "../globals/globals";
+import {localhostUrl} from "../globals/globals";
 import 'rxjs/add/operator/map';
 @Injectable()
 
 export class MemberService {
 
-  public baseUrl:string = globals.localhostUrl+'api/members/';
+  public baseUrl:string = localhostUrl+'api/members/';
   constructor(public http: Http) {
+    console.warn(this.baseUrl);
    }
    public members: any;
 
