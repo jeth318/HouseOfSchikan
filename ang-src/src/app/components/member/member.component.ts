@@ -69,7 +69,7 @@ export class MemberComponent implements OnInit {
   }
 
   selectedMember(id){
-    this.modalVisible = true;
+    this.modalVisible = true
     this.addMember = false;
     this.members.forEach((memb, i) => {
       if (memb._id === id) {
@@ -89,7 +89,6 @@ export class MemberComponent implements OnInit {
         this.isLoading = false;
         this.memberModel = {};
         this.modalVisible = false;
-        
       });
   }
 

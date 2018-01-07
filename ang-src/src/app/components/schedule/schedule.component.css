@@ -55,6 +55,11 @@ th.month {
     display: all;    
 }
 
+.loading-img {
+    height: 100px;
+    width: 100px;
+}
+
 .thead-table {
     margin-bottom: 0;
     border-spacing: 1px;

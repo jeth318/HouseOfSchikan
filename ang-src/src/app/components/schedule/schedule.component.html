@@ -1,3 +1,6 @@
+<div *ngIf="!isDataReady">
+<img class="loading-img" src="/assets/images/spinner-loading.gif" />
+</div>
 <div *ngIf="isDataReady">
    <div class="ui centered grid table-wrapper">
         <table class="thead-table">

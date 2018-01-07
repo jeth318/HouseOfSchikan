@@ -1,14 +1,19 @@
 <div class="ui container">
     <div class="ui one columns grid right stackable">
       <div class="column" *ngIf="isDataReady">
-          <button type="button" class="ui button primary settingsBtn"(click)="toggleSettings()"><i class="settings icon"></i>{{settingsText}}</button>
+          <button type="button" class="ui button primary settingsBtn"(click)="toggleSettings()">
+            <i class="settings icon settingsBtn-icon"></i>
+            {{settingsText}}
+          </button>
       </div>
     </div>
   </div>
 <div class="ui container member-area" *ngIf="showMembersArea==true">
     <div class="ui two columns grid centered stackable">
       <div class="column">
-          <table class="ui striped table unstackable">
+          <div class="ui segments">
+              <div class="ui segment no-padding">
+          <table class="ui striped table unstackable member-table no-border">
               <thead>
                 <tr>
                   <th>#</th>
@@ -38,6 +43,8 @@
                 </tr>
               </tfoot>
             </table>
+          </div>
+        </div>
       </div>
       <div class="column" *ngIf="modalVisible==true">
           <div class="ui segments">
