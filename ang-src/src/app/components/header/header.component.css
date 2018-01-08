@@ -13,3 +13,11 @@
         font-size: 3rem;
     }
 }
+
+.owl-date-time {
+    color: black;
+}
+
+.owl-calendar-wrapper {
+    background-color: white;
+}

@@ -9,6 +9,7 @@ import { TaskService } from './services/task.service';
 import { HttpModule } from '@angular/http';
 import { MemberComponent } from './components/member/member.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DateTimePickerModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    DateTimePickerModule
   ],
   providers: [MemberService, TaskService],
   bootstrap: [AppComponent]
