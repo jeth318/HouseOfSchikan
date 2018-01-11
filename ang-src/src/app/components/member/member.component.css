@@ -54,11 +54,9 @@ input {
     position: absolute !important;
     top: -60px !important;
     right: 5px !important;
-    padding-right: 0px;
-    padding-left: 11px;
-    font-size: 1.3rem;
-    padding-top: 4px;
-    padding-bottom: 4px;   
+
+    font-size: 0.8rem;
+  
 }
 
 .settingsBtn-icon {

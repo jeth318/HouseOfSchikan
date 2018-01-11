@@ -9,13 +9,6 @@ export class TaskService {
   public baseUrl:string = globals.localhostUrl+'api/tasks/';
 
   constructor(private http:Http) {
-    /* this.tasks = [
-        'köket',
-        'tvätt',
-        'stora-badrummet',
-        'lilla-badrummen',
-        'damsuga',
-    ]; */
    }
    public tasks: any;
 

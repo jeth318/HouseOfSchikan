@@ -10,65 +10,50 @@ import * as $ from 'jquery';
 export class MemberComponent implements OnInit {
 
   constructor(private _memberService: MemberService) {
-    this.isDataReady = false;
-    this.members = [];
-    this.firstName = '';
     this.lastName = '';
-    this.description = '';
+    this.firstName = '';
     this.addMember = true;
-    this.memberModel = {};
     this.isLoading = false;
+    this.description = '';
+    this.isDataReady = false;
+    this.memberModel = {};
     this.modalVisible = false;
+    this.settingsText = 'Inställningar';
     this.showMembersArea = false;
-    /* this.settingsText = 'Hantera roomies';
-    this.showMembersArea ? this.settingsText == 'Göm inställningar' : 'Hantera roomies';    */ 
-   }
-  public addMember: Boolean;  
-  public description: String;
-  public firstName: String;
-  public lastName: String;  
-  public members: any[];
-  public memberModel: any;
-  public isLoading: Boolean;
-  public modalVisible: Boolean;
-  public showMembersArea: Boolean;
-  public settingsText: String;
-  public isDataReady: Boolean;
-
-  ngOnInit() {
-    this.fetchEvent().then(()=>{
-      this.isDataReady = true;
-    });
   }
 
-  fetchEvent(){
-    return new Promise((resolve, reject) => {
-      this._memberService.getAllMembers().subscribe((data) => {
-        if (data.success) {
-            this.members = data.members;
-            resolve();
-        }
-    });
-  });
- }
-  toggleSettings(){
+  public members: any[];
+  public lastName: String;
+  public addMember: Boolean;
+  public firstName: String;
+  public isLoading: Boolean;
+  public description: String;
+  public memberModel: any;
+  public modalVisible: Boolean;
+  public settingsText: String;
+  public isDataReady: Boolean;
+  public showMembersArea: Boolean;
+
+  ngOnInit() {
+    this.getAllMembers();
+  }
+
+  toggleSettings() {
     this.showMembersArea = !this.showMembersArea;
     if (this.showMembersArea) {
-      this.settingsText = '';
+      this.settingsText = 'Göm inställningar';
     } else {
-      this.settingsText = '';
+      this.settingsText = 'Inställningar';
     }
   }
 
-  getAllMembers(){
+  getAllMembers() {
     this._memberService.getAllMembers().subscribe((data) => {
-      if (data.success) {
-          this.members = data.members;
-      }
-  });
+      data.success ? this.members = data.members : null;
+    });
   }
 
-  selectedMember(id){
+  selectedMember(id) {
     this.modalVisible = true
     this.addMember = false;
     this.members.forEach((memb, i) => {
@@ -79,11 +64,11 @@ export class MemberComponent implements OnInit {
     });
   }
 
-  updateMember(){
+  updateMember() {
     this.isLoading = true;
     this._memberService.updateMemberName(this.memberModel).subscribe(
-      (data) => {},
-      (error) => {},
+      (data) => { },
+      (error) => { },
       () => {
         this.getAllMembers();
         this.isLoading = false;
@@ -92,53 +77,51 @@ export class MemberComponent implements OnInit {
       });
   }
 
-  deleteMember(){
-    this.isLoading = true; 
+  deleteMember() {
+    this.isLoading = true;
     var txt;
     var r = confirm(`Säker på att du vill ta bort ${this.memberModel.firstName}?`);
     if (r == true) {
-        txt = "You pressed OK!";
-        this._memberService.deleteMember(this.memberModel._id).subscribe(
-          (data) => {},
-          (error) => {},
-          () => { 
-            this.getAllMembers();
-            this.isLoading = false;
-            this.memberModel = {};
-            this.addMember = true;
-            this.modalVisible = false;
-            
-
-          }
-        );
+      txt = "You pressed OK!";
+      this._memberService.deleteMember(this.memberModel._id).subscribe(
+        (data) => { },
+        (error) => { },
+        () => {
+          this.getAllMembers();
+          this.isLoading = false;
+          this.memberModel = {};
+          this.addMember = true;
+          this.modalVisible = false;
+        }
+      );
     } else {
-        txt = "You pressed Cancel!";
+      txt = "You pressed Cancel!";
     }
   }
 
-  initializeNew(){
+  initializeNew() {
     this.addMember = true;
-    this.modalVisible = true; 
-    this.getAllMembers();    
-    this.memberModel = {}; 
-    }
+    this.modalVisible = true;
+    this.getAllMembers();
+    this.memberModel = {};
+  }
 
-  cancel(){
+  cancel() {
     this.memberModel = {};
     this.modalVisible = false;
   }
 
-  addNew(){
+  addNew() {
     this.isLoading = true;
-    this.memberModel.priority = this.members.length+1;
+    this.memberModel.priority = this.members.length + 1;
     this._memberService.createMember(this.memberModel).subscribe(
-      (data) => {},
-      (error) => {},
-      () => { 
+      (data) => { },
+      (error) => { },
+      () => {
         this.getAllMembers();
         this.isLoading = false;
         this.memberModel = {};
-        this.modalVisible = false;        
+        this.modalVisible = false;
       }
     )
   }

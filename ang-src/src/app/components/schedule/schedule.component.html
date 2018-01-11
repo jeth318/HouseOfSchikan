@@ -1,7 +1,7 @@
-<div *ngIf="!isDataReady">
+<div *ngIf="!members || !tasks">
 <img class="loading-img" src="/assets/images/spinner-loading.gif" />
 </div>
-<div *ngIf="isDataReady">
+<div *ngIf="members && tasks">
    <div class="ui centered grid table-wrapper">
         <table class="thead-table">
           <thead>
@@ -22,7 +22,7 @@
             <tr class="{{currentMonth(monthIndex)? 'current' : ''}}">
               <td class="month">{{month}}</td>
               <td class="icon" *ngFor="let member of members; let i = index; let even = even;">
-                <img class="icon-img" *ngFor="let task of renderTaskList(i, monthIndex)" src="assets/images/{{task}}.png" />
+                <img class="icon-img" *ngFor="let task of renderTaskList(i, monthIndex)" src="assets/images/{{task.name}}.png" />
               </td>
             </tr>
           </tbody>

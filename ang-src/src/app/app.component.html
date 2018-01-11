@@ -1,12 +1,5 @@
 <div class="ui container">
-    <p style="font-size: 1.2rem; margin: 0;">C/O: Schikan</p>
-        <app-header></app-header>    
-    <div [ngClass]="showSettings==true ? 'ui two columns grid centered stackable' : 'ui one columns grid centered stackable'">
-            <div class="column">
-                    <app-member></app-member>
-                </div>
-        <div class="column">
-            <app-schedule></app-schedule>
-        </div>
-    </div>
+    <app-header></app-header>    
+    <app-member></app-member>  
+    <app-schedule></app-schedule>
 </div>

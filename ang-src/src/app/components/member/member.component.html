@@ -1,6 +1,6 @@
 <div class="ui container">
     <div class="ui one columns grid right stackable">
-      <div class="column" *ngIf="isDataReady">
+      <div class="column" *ngIf="members">
           <button type="button" class="ui button primary settingsBtn"(click)="toggleSettings()">
             <i class="settings icon settingsBtn-icon"></i>
             {{settingsText}}
