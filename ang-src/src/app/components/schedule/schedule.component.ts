@@ -3,135 +3,112 @@ import { MemberService } from '../../services/member.service';
 import { TaskService } from '../../services/task.service';
 
 interface Member {
-    _id: Number;
-    firstName: String;
-    lastName: String;
+  _id: Number;
+  firstName: String;
+  lastName: String;
 }
 
 interface Task {
-    _id: Number;
-    name: String;
+  _id: Number;
+  name: String;
 }
 
 @Component({
-    selector: 'app-schedule',
-    templateUrl: './schedule.component.html',
-    styleUrls: ['./schedule.component.css']
+  selector: 'app-schedule',
+  templateUrl: './schedule.component.html',
+  styleUrls: ['./schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
 
-    public tasks: String[];
-    public members: any[];
-    public months: String[];
-    public year: String;
-    public month: String;
-    public isDataReady: Boolean;
+  public tasks: String[];
+  public members: any[];
+  public months: String[];
+  public taskList: any[];
+  public year: String;
+  public month: String;
+  public isDataReady: Boolean;
 
-    constructor(private _memberService: MemberService, private _taskService: TaskService) {
-        
-        this.isDataReady = false;
-        this.year = new Date().getFullYear().toString();
-        this.month = new Date().getMonth().toString();
-        this.months = [
-            'Januari',
-            'Februari',
-            'Mars',
-            'Aprli',
-            'Maj',
-            'Juni',
-            'Juli',
-            'Augusti',
-            'September',
-            'Oktober',
-            'November',
-            'December',
-        ]; 
-    }
+  constructor(private _memberService: MemberService, private _taskService: TaskService) {
 
-    ngOnInit() {
-       this.getAllMembers();
-       this.getAllTasks();
-    }
+    this.isDataReady = false;
+    this.year = new Date().getFullYear().toString();
+    this.month = new Date().getMonth().toString();
+    this.months = [
+      'Januari',
+      'Februari',
+      'Mars',
+      'Aprli',
+      'Maj',
+      'Juni',
+      'Juli',
+      'Augusti',
+      'September',
+      'Oktober',
+      'November',
+      'December',
+    ];
+  }
 
-    getAllMembers(){
-        this._memberService.getAllMembers()
-        .subscribe((data)=>{
-            data.success ? this.members = data.members : null;
-        });
-    }
-    
-      getAllTasks(){
-        this._taskService.getAllTasks()
-        .subscribe((data)=>{
-            data.success ? this.tasks = data.tasks : null;
-            console.log(this.tasks);
-        });
-      }
+  ngOnInit() {
+    this.getAllMembers();
+    this.getAllTasks();
+  }
 
-    public genereteTaskList() {
-        let taskListRet = this.tasks;
-        let taskReturn = []
+  getAllTasks() {
+    this._taskService.getAllTasks()
+      .subscribe((data) => {
+        data.success ? this.tasks = data.tasks : null;
+      });
+  }
 
-        switch (this.members.length) {
-            case 5:
-                taskReturn = this.tasks;
-                break;
-            case 4:
-                taskReturn.push(taskListRet.slice(0, 2));
-                taskReturn.push(taskListRet[2]);
-                taskReturn.push(taskListRet[3]);
-                taskReturn.push(taskListRet[4]);
-                break;
-            case 3:
-                taskReturn.push(taskListRet.slice(0, 2));
-                taskReturn.push(taskListRet.slice(2, 4));
-                taskReturn.push(taskListRet[this.tasks.length - 1]);
-                break;
-            case 2:
-                taskReturn.push(taskListRet.slice(0, 2));
-                taskReturn.push(taskListRet.slice(2, 5));
-                break;
-            case 1:
-                taskReturn.push(taskListRet.slice(0, 5));
-                break;
-            default:
-                taskReturn = this.tasks;
-                break;
-        }
-        return taskReturn;
-    }
+  getAllMembers() {
+    this._memberService.getAllMembers()
+      .subscribe((data) => {
+        data.success ? this.members = data.members : null;
+      });
+  }
 
-    public renderTaskList(taskIndex, monthIndex) {
-        let newArr = [];
-        let taskList = this.genereteTaskList();
+  public getMembersLength() {
+    return this.members.length;
+  }
 
-        for (let i = 0; i < 12; i++) {
-            var pointer = (i + taskIndex) % taskList.length;
-            if (Array.isArray(taskList[pointer])) {
-                newArr.push(taskList[pointer]);
-            } else {
-                newArr.push(new Array(taskList[pointer]));
-            }
-        }
-        return newArr[monthIndex];
-    }
+  public shortMonth(index) {
+    return this.months[index].slice(0, 3);
+  }
 
-    public getMembersLength() {
-        return this.members.length;
-    }
+  public currentMonth(index) {
+    return Number(this.month) === index ? true : false;
+  }
 
-    public shortMonth(index) {
-        return this.months[index].slice(0, 3);
-    }
+  public getInitials(memberIndex) {
+    return this.members[memberIndex].firstName.slice(0, 1) + 
+     '.' + this.members[memberIndex].lastName.slice(0, 1);
+  }
 
-    public currentMonth(index) {
-        return Number(this.month) === index ? true : false;
-    }
+  public generateTaskList() {
+    console.log('Ricke')
+    let taskReturn = [];
+    const membCount = this.members.length;
+    const taskCount = this.tasks.length;
 
-    public getInitials(index) {
-        return this.members[index].firstName.slice(0, 1) + '.'
-            + this.members[index].lastName.slice(0, 1)
-    }
-    
+    this.tasks.forEach((task, i) => {
+      if (taskReturn[i % membCount] === undefined)
+        taskReturn[i % membCount] = task;
+      else if (Array.isArray(taskReturn[i % membCount]))
+        taskReturn[i % membCount].push(this.tasks[i % taskCount]);
+      else
+        taskReturn[i % membCount] = [taskReturn[i % membCount], this.tasks[i % taskCount]];
+    })  
+    console.log(taskReturn);
+    this.taskList = taskReturn;
+  }
+
+  public renderTaskList(memberIndex, monthIndex){
+    !this.taskList && this.generateTaskList();
+    if (!Array.isArray(this.taskList[(memberIndex + monthIndex) % this.taskList.length]))
+      return [this.taskList[(memberIndex + monthIndex) % this.taskList.length]];
+    else
+      return this.taskList[(memberIndex + monthIndex) % this.taskList.length]
+  }
 }
 

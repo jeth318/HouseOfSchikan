@@ -6,11 +6,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 
 export class MemberService {
+  
 
   public baseUrl: string = localhostUrl + 'api/members/';
-  constructor(public http: Http) {
-    console.warn(this.baseUrl);
-  }
+  constructor(public http: Http) {}
+  
   public members: any;
 
   createMember(memberToCreate) {
