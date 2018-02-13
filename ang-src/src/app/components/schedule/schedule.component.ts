@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MemberService } from '../../services/member.service';
 import { TaskService } from '../../services/task.service';
+import * as $ from 'jquery';
 
 interface Member {
   _id: Number;
@@ -48,10 +49,16 @@ export class ScheduleComponent implements OnInit {
       'December',
     ];
   }
+  
+
+
 
   ngOnInit() {
     this.getAllMembers();
     this.getAllTasks();
+    $('.ui.sticky').sticky({
+      context: '.thead-hej'
+    });
   }
 
   getAllTasks() {
@@ -80,9 +87,9 @@ export class ScheduleComponent implements OnInit {
     return Number(this.month) === index ? true : false;
   }
 
-  public getInitials(memberIndex) {
-    return this.members[memberIndex].firstName.slice(0, 1) + 
-     '.' + this.members[memberIndex].lastName.slice(0, 1);
+  public getInitials(index) {
+    return this.members[index].firstName.slice(0, 1) + 
+     '.' + this.members[index].lastName.slice(0, 1);
   }
 
   public generateTaskList() {

@@ -1,6 +1,5 @@
 import { Component, OnInit, style } from '@angular/core';
 import { MemberService } from '../../services/member.service';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-member',
@@ -39,6 +38,7 @@ export class MemberComponent implements OnInit {
   }
 
   toggleSettings() {
+  
     this.showMembersArea = !this.showMembersArea;
     if (this.showMembersArea) {
       this.settingsText = 'Göm inställningar';
