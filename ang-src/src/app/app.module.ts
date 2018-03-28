@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MemberComponent } from './components/member/member.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WhiteboardComponent } from './components/whiteboard/whiteboard.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     MemberComponent,
     ScheduleComponent,
+    WhiteboardComponent,
   ],
   imports: [
     HttpModule,

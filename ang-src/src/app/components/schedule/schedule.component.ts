@@ -56,9 +56,6 @@ export class ScheduleComponent implements OnInit {
   ngOnInit() {
     this.getAllMembers();
     this.getAllTasks();
-    $('.ui.sticky').sticky({
-      context: '.thead-hej'
-    });
   }
 
   getAllTasks() {
