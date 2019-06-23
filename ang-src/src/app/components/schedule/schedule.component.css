@@ -1,0 +1,160 @@
+
+/* ----- TABLE ------*/
+table {
+    max-width: 700px;
+    padding: 0px !important;
+    width: 100%;
+    background: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: .28571429rem;
+    border-spacing: 0;
+}
+
+tr.month-mobile {
+    background-color: lightgrey;
+    font-size: 1.7rem;
+    display:all;
+    text-align: center;
+}
+
+th {
+    font-size: 1.4rem;
+    font-weight: 300; 
+    color:white;
+    background-color:rgba(0, 0, 0, 0.659);
+    border-right: 1px solid lightgrey;
+    height: 40px;
+}
+
+th.member {
+    display: all;
+    min-width: 80px;
+    font-size: 1.7rem;
+    border-top-left-radius: 5px;
+
+}
+th.member:last-child {
+    border-top-right-radius: 5px;
+    border-right: none;
+
+}
+th.member-mobile {
+    display: all;
+    width: 74px;
+    border-radius: 3px;
+}
+
+th.month {
+    width: 90px;
+    font-size: 2rem;
+    background-color: #7a2e85;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+    display: all;    
+}
+
+.loading-img {
+    height: 100px;
+    width: 100px;
+}
+
+.thead-table {
+    margin-bottom: 0;
+    border-spacing: 1px;
+    border-radius: 3px, 3px, 0px, 0px;
+}
+
+.task-table {
+    border-top: none;
+    border-bottom: 1px solid grey;
+    border-radius: 3px, 3px;
+}
+
+.table-wrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.table-wrapper-inner {
+    max-height: 80vh;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+}
+
+tr.current td{
+    background-color: lightgreen;
+}
+
+td.month {
+    width: 90px;
+    text-align: center;
+    border-bottom: 1px solid darkgrey;
+    font-weight: 500;
+    background-color: lightgrey;
+    font-size: 1.3rem;
+    padding: 0;
+    display: all;
+}
+
+td.month-mobile{
+    padding: 0.3rem;
+}
+
+td.icon{
+    height: 75px;
+    text-align: center;
+    border-left: 1px solid rgba(34,36,38,.1);
+    border-bottom: 1px solid lightgrey;
+}
+
+/* td.köket {
+    background-image: url('../../../images/kitchen-spoons-set.png');
+}
+td.damsuga {
+    background-image: url('../../../images/vacuum.png');
+}
+td.tvätt {
+    background-image: url('../../../images/washing-machine.png');
+}
+td.stora-badrummet {
+    background-image: url('../../../images/water-closet.png');
+}
+td.lilla-badrummen {
+    background-image: url('../../../images/water-closet-small.png');
+} */
+
+.icon-img {
+    max-width:100%;
+    max-height:100%;
+    text-align: center;
+    padding: 10px;
+}
+
+/* ----- MEDIA QUERIES ------*/
+
+@media screen and (min-width: 525px) {
+    tr.month-mobile {
+        display: none;
+    }
+    th.member-mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 525px) {
+    td.month, th.month, th.member {
+        display: none;
+    }
+    td.icon {
+        height: 65px;
+    }
+    header {
+        font-size: 3rem;
+    }
+    .table-wrapper-inner {
+        max-height: 80vh;
+    }
+}
+

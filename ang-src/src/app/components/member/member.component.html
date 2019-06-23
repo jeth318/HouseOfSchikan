@@ -1,0 +1,106 @@
+<div class="ui container">
+    <div class="ui one columns grid right stackable">
+      <div class="column" *ngIf="members">
+          <button type="button" class="ui button primary settingsBtn"(click)="toggleSettings()">
+            <i class="settings icon settingsBtn-icon"></i>
+            {{settingsText}}
+          </button>
+      </div>
+    </div>
+  </div>
+<div class="ui container member-area" *ngIf="showMembersArea==true">
+    <div class="ui two columns grid centered stackable">
+      <div class="column">
+          <div class="ui segments">
+              <div class="ui segment no-padding">
+          <table class="ui striped table unstackable member-table no-border">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Förnamn</th>
+                  <th>Efternamn</th>
+                  <th>Välj</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let member of members; let i = index;">
+                  <td>{{i+1}}</td>
+                  <td>{{member.firstName}}</td>
+                  <td>{{member.lastName}}</td>
+                  <td>
+                    <input class="ui radio" type="radio" name="optionsRadios" id="optionsRadios1" value="case" (click)="selectedMember(member._id)">
+                  </td>
+                </tr>
+              </tbody>
+                <tfoot class="full-width">
+                <tr>
+                  <th></th>
+                  <th colspan="4">
+                    <div class="ui right floated small primary labeled icon button" (click)="initializeNew()">
+                      <i class="laptop icon"></i> Lägg till ny roomie
+                    </div>
+                  </th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="column" *ngIf="modalVisible==true">
+          <div class="ui segments">
+              <div class="ui segment">
+                <h3 class="ui green header" *ngIf="addMember==true" >Lägg till roomie</h3>
+                <h3 class="ui green header" *ngIf="addMember==false" >Uppdatera roomie</h3>
+
+              </div>
+              <div class="ui segment padded left aligned">
+                <form class="ui form">
+                  <div class="field required">
+                    <label for="name">Förnamn</label>
+                    <input
+
+                      type="text"
+                      class="form-control"
+                      id="forname"
+                      [(ngModel)]="memberModel.firstName"
+                      name="firstname"
+                    >
+                  </div>
+                  <div class="field required">
+                    <label for="id">Efternamn</label>
+                    <input type="text" class="form-control" id="lastname" [(ngModel)]="memberModel.lastName" name="lastname">
+                  </div>
+                  <!-- <div class="field required">
+                    <label for="id">Om gängmedlemmen</label>
+                    <textarea rows="2" [(ngModel)]="description" name="description"></textarea>
+                  </div>    -->
+                  <div *ngIf="addMember==false">
+                    <button type="submit" [ngClass]="isLoading==true ? 'ui button primary disabled' : 'ui button primary'" (click)="updateMember()">Uppdatera</button>
+                    <button type="submit" [ngClass]="isLoading==true ? 'ui button red disabled' : 'ui button red'" (click)="deleteMember()">Ta bort</button>
+                    <span *ngIf="isLoading==true" class="flash flash-loading" >Laddar...</span>
+                    <span *ngIf="successMessage" class="ui header green flash flash-success">{{successMessage}}</span>
+
+                  </div>
+                  <div *ngIf="addMember==true">
+                    <button
+                      type="button"
+                      class="ui button primary"
+                      [ngClass]="isLoading==true? 'disabled' : ''"
+                      (click)="addNew()">Spara
+                    </button>
+                    <button
+                      type="button"
+                      class="ui button warning"
+                      [ngClass]="isLoading==true? 'disabled' : ''"
+                      (click)="cancel()">Avbryt
+                    </button>
+                    <span *ngIf="isLoading==true" class="flash flash-loading" >Laddar...</span>
+                    <span *ngIf="successMessage" class="ui header green flash flash-success">{{successMessage}}</span>
+                    <span *ngIf="errorMessage" class="ui header red flash flash-fail">{{errorMessage}}</span >
+                  </div>
+                </form>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,64 @@
+.member-area{
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 1.5rem;
+}
+.member-area form{
+    
+}
+
+.column{
+    padding-top: 0 !important;
+    transition: all linear 0.5s;
+}
+
+.no-border {
+  border: none;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.flash {
+    font-family: 'Indie Flower', cursive;
+}
+
+h3 {
+    font-size: 1.5rem !important;
+    font-family: 'Indie Flower', cursive !important;
+}
+
+table td {
+    padding: 0.4rem;
+    text-align: left;
+}
+
+input {
+    padding: 6px !important;
+    font-family: 'Indie Flower', cursive !important;    
+}
+
+.modal-invisible {
+    display: none;
+}
+.modal-invisible {
+    display: all;
+}
+
+.title {
+    background-color: #F9FAFB;
+}
+
+.settingsBtn {
+    position: absolute !important;
+    top: -60px !important;
+    right: 5px !important;
+
+    font-size: 0.8rem;
+  
+}
+
+.settingsBtn-icon {
+    opacity: 1 !important;
+}
