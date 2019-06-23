@@ -25,7 +25,7 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 
 // Set Static Folder
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'ang-src/dist/roomies-v2')));
 
 // Body Parser Middleware
 app.use(bodyParser.json());
@@ -34,13 +34,8 @@ app.use(bodyParser.json());
 const routes = require('./api-routes');
 app.use('/', routes);
 
-// Index Route
-app.get('/',(req,res)=>{
-    res.send('<h1>Invalid Endpoint</h1>');
-});
-
 app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname, 'public/index.html'));
+    res.sendFile(path.join(__dirname, 'ang-src/dist/roomies-v2/index.html'));
 });
 
 
