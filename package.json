@@ -9,7 +9,7 @@
     "postinstall": "cd ang-src && npm install && ng build"
   },
   "engines": {
-    "node": "8.9.1",
+    "node": "10.9.*",
     "npm": "5.6.0"
   },
   "author": "",
