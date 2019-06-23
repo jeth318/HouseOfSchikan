@@ -1,4 +1,4 @@
-import { Component, OnInit, style } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MemberService } from '../../services/member.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class MemberComponent implements OnInit {
   }
 
   toggleSettings() {
-  
+
     this.showMembersArea = !this.showMembersArea;
     if (this.showMembersArea) {
       this.settingsText = 'Göm inställningar';

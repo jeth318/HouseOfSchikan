@@ -15,13 +15,17 @@ body {
     padding-top: 40px;
 }
 
+.ui-container {
+  margin: 0 !important;
+}
+
 body ::-webkit-scrollbar-track {
     background: transparent;
-} 
+}
 
-body ::-webkit-scrollbar { 
-    display: none; 
-} 
+body ::-webkit-scrollbar {
+    display: none;
+}
 .member-area {
     padding-top: 0;
     margin-top: 0;

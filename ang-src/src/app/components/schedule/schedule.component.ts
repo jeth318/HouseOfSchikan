@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MemberService } from '../../services/member.service';
 import { TaskService } from '../../services/task.service';
-import * as $ from 'jquery';
 
 interface Member {
   _id: Number;
@@ -49,7 +48,7 @@ export class ScheduleComponent implements OnInit {
       'December',
     ];
   }
-  
+
 
 
 
@@ -85,7 +84,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   public getInitials(index) {
-    return this.members[index].firstName.slice(0, 1) + 
+    return this.members[index].firstName.slice(0, 1) +
      '.' + this.members[index].lastName.slice(0, 1);
   }
 
@@ -102,7 +101,7 @@ export class ScheduleComponent implements OnInit {
         taskReturn[i % membCount].push(this.tasks[i % taskCount]);
       else
         taskReturn[i % membCount] = [taskReturn[i % membCount], this.tasks[i % taskCount]];
-    })  
+    })
     console.log(taskReturn);
     this.taskList = taskReturn;
   }

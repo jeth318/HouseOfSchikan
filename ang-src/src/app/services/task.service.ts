@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import * as globals from "../globals/globals";
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
+import { pipe } from 'rxjs';
 @Injectable()
 
 export class TaskService {
@@ -14,6 +15,6 @@ export class TaskService {
 
   getAllTasks() {
     let headers = new Headers();
-    return this.http.get(this.baseUrl, {headers: headers}).map(res => res.json());;
+    return this.http.get(this.baseUrl, {headers: headers}).pipe(map(res => res.json()));
   }
 }

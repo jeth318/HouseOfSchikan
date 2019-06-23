@@ -1,9 +1,10 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+
 import { HttpModule } from '@angular/http';
 import { TaskService } from './services/task.service';
 import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { MemberService } from './services/member.service';
 import { HeaderComponent } from './components/header/header.component';
 import { MemberComponent } from './components/member/member.component';
@@ -27,7 +28,7 @@ import { WhiteboardComponent } from './components/whiteboard/whiteboard.componen
   ],
   providers: [
     TaskService,
-    MemberService 
+    MemberService
   ],
   bootstrap: [AppComponent]
 })

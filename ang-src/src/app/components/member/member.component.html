@@ -1,29 +1,4 @@
 <div class="ui container">
-    <div class="ui modal">
-        <i class="close icon"></i>
-        <div class="header">
-          Profile Picture
-        </div>
-        <div class="image content">
-          <div class="ui medium image">
-            <img src="/images/avatar/large/chris.jpg">
-          </div>
-          <div class="description">
-            <div class="ui header">We've auto-chosen a profile image for you.</div>
-            <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-            <p>Is it okay to use this photo?</p>
-          </div>
-        </div>
-        <div class="actions">
-          <div class="ui black deny button">
-            Nope
-          </div>
-          <div class="ui positive right labeled icon button">
-            Yep, that's me
-            <i class="checkmark icon"></i>
-          </div>
-        </div>
-      </div>
     <div class="ui one columns grid right stackable">
       <div class="column" *ngIf="members">
           <button type="button" class="ui button primary settingsBtn"(click)="toggleSettings()">
@@ -76,18 +51,18 @@
               <div class="ui segment">
                 <h3 class="ui green header" *ngIf="addMember==true" >Lägg till roomie</h3>
                 <h3 class="ui green header" *ngIf="addMember==false" >Uppdatera roomie</h3>
-                
+
               </div>
               <div class="ui segment padded left aligned">
                 <form class="ui form">
                   <div class="field required">
                     <label for="name">Förnamn</label>
-                    <input 
-                      
-                      type="text" 
-                      class="form-control" 
-                      id="forname" 
-                      [(ngModel)]="memberModel.firstName" 
+                    <input
+
+                      type="text"
+                      class="form-control"
+                      id="forname"
+                      [(ngModel)]="memberModel.firstName"
                       name="firstname"
                     >
                   </div>
@@ -98,23 +73,23 @@
                   <!-- <div class="field required">
                     <label for="id">Om gängmedlemmen</label>
                     <textarea rows="2" [(ngModel)]="description" name="description"></textarea>
-                  </div>    -->         
+                  </div>    -->
                   <div *ngIf="addMember==false">
                     <button type="submit" [ngClass]="isLoading==true ? 'ui button primary disabled' : 'ui button primary'" (click)="updateMember()">Uppdatera</button>
                     <button type="submit" [ngClass]="isLoading==true ? 'ui button red disabled' : 'ui button red'" (click)="deleteMember()">Ta bort</button>
-                    <span *ngIf="isLoading==true" class="flash flash-loading" >Laddar...</span>         
+                    <span *ngIf="isLoading==true" class="flash flash-loading" >Laddar...</span>
                     <span *ngIf="successMessage" class="ui header green flash flash-success">{{successMessage}}</span>
-                                        
+
                   </div>
                   <div *ngIf="addMember==true">
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       class="ui button primary"
                       [ngClass]="isLoading==true? 'disabled' : ''"
                       (click)="addNew()">Spara
                     </button>
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       class="ui button warning"
                       [ngClass]="isLoading==true? 'disabled' : ''"
                       (click)="cancel()">Avbryt
