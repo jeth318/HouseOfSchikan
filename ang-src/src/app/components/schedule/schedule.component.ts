@@ -29,7 +29,6 @@ export class ScheduleComponent implements OnInit {
   public isDataReady: Boolean;
 
   constructor(private _memberService: MemberService, private _taskService: TaskService) {
-
     this.isDataReady = false;
     this.year = new Date().getFullYear().toString();
     this.month = new Date().getMonth().toString();

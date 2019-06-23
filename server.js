@@ -15,6 +15,7 @@ mongoose.connect(db, {useMongoClient: true, reconnectTries: 500, reconnectInterv
         : console.log('Connected to database => ' + db)
 });
 
+console.log(process.env);
 const app = express();
 
 // Port number
