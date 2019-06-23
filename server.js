@@ -10,12 +10,11 @@ const db            = require('./config/config').database;
 mongoose.Promise = global.Promise;
 
 // Connect To Database
-mongoose.connect(db, {useMongoClient: true, reconnectTries: 500, reconnectInterval: 2500}, (err) => {
+mongoose.connect(db, {reconnectTries: 500, reconnectInterval: 2500}, (err) => {
     err ? console.log('Failed to connect to database. Make sure you have set up your environtment variables with correct mongo URL: ', err)
         : console.log('Connected to database => ' + db)
 });
 
-console.log(process.env);
 const app = express();
 
 // Port number

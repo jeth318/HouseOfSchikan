@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm install && node server.js",
-    "heroku-postbuild": "cd ang-src && npm install && ng build -prod",
-    "postinstall": "node server.js"
+    "postinstall": "cd ang-src && npm install && ng build"
   },
   "engines": {
     "node": "8.9.1",
